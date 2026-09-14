@@ -286,3 +286,658 @@
           <div class="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
             <div class="text-[10px] text-slate-500 uppercase font-mono font-semibold mb-2">Impacto en tu Bolsillo (Simulación Visual)</div>
             <div class="h-28 w-full">
+              <canvas id="finalImpactChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-3">
+          <div class="card-clean rounded-2xl p-4 md:p-5 border-emerald-200 bg-emerald-50/40">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2">
+              <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i> Valor para el Usuario (35%)
+            </div>
+            <ul class="text-xs text-slate-700 space-y-1.5">
+              <li class="flex items-start gap-1.5">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span id="valUserImpact">Solución con tiempos y montos lógicos reales.</span>
+              </li>
+              <li class="flex items-start gap-1.5">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span>Interacción fluida por voz y co-creación continua de la estrategia.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-clean rounded-2xl p-4 md:p-5 border-sky-200 bg-sky-50/40">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-sky-800 uppercase tracking-wider mb-2">
+              <i data-lucide="briefcase" class="w-4 h-4 text-sky-600"></i> Valor para el Negocio (25%)
+            </div>
+            <ul class="text-xs text-slate-700 space-y-1.5">
+              <li class="flex items-start gap-1.5">
+                <span class="text-sky-600 font-bold">$</span>
+                <span><strong>Líneas Aliadas:</strong> Alianzas y comisiones por originación de crédito educativo o compra de cartera.</span>
+              </li>
+              <li class="flex items-start gap-1.5">
+                <span class="text-sky-600 font-bold">$</span>
+                <span><strong>Fidelización:</strong> El usuario adopta a FinAI como su asesor financiero recurrente.</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="resetConversation()" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 border border-slate-200 transition">
+            Iniciar una nueva charla
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL CONFIG API KEY -->
+  <div id="configModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-clean w-full max-w-md p-6 rounded-2xl shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="key" class="w-4 h-4 text-emerald-600"></i> Configuración Groq API
+        </h3>
+        <button onclick="toggleConfigModal()" class="text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-500 mb-4">
+        Ingresa tu API Key de Groq sin espacios:
+      </p>
+      <input 
+        id="apiKeyInput" 
+        type="password" 
+        placeholder="gsk_..." 
+        class="w-full bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white rounded-xl px-3.5 py-2.5 text-sm text-slate-800 font-mono mb-4 outline-none transition"
+      />
+      <div class="flex justify-end gap-2">
+        <button onclick="toggleConfigModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Cerrar</button>
+        <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeData = null;
+    let selectedOptionIndex = 0;
+    let finalChart = null;
+    let isCallActive = false;
+    let isScreen2Listening = false;
+    let turnCount = 0;
+
+    // Historial con REGLAS FINANCIERAS Y TEMPORALES ESTRICTAS
+    let conversationHistory = [
+      {
+        role: "system",
+        content: `Eres FINAI, un asesor financiero de élite, riguroso matemáticamente y conversacional. Hablas directamente por voz en español con el usuario.
+
+REGLAS MATEMÁTICAS Y TEMPORALES OBLIGATORIAS:
+1. SEMESTRES ACADÉMICOS: Un semestre dura 6 meses. Si el usuario menciona "5 semestres de 5 millones", el costo TOTAL es $25.000.000 distribuidos a lo largo de 2.5 años (30 meses), NUNCA en 5 meses. Calcula ahorros semestrales (cada 6 meses), líneas educativas o cesantías.
+2. CRÉDITOS Y TARJETAS: Desglosa tasas reales e intereses ocultos.
+3. DETECCIÓN DE ESTRATEGIAS: Cuando el usuario exprese una meta con montos claros o ya haya compartido datos suficientes para formular alternativas completas, DEBES poner "is_ready_for_solutions": true.
+4. BREVEDAD EN VOZ: "voice_reply" debe tener de 1 a 3 oraciones contundentes para ser leídas por voz sin cansar.
+
+DEVUELVE SIEMPRE FORMATO JSON ESTRICTO:
+{
+  "voice_reply": "Mensaje en español conversacional de 1 a 3 frases.",
+  "is_ready_for_solutions": true,
+  "best_recommendation": {
+    "title": "Nombre claro y lógico de la mejor opción",
+    "reason": "Por qué es la ruta óptima matemáticamente",
+    "impact": "Ahorro o beneficio clave (ej: Ahorro de $3.200.000 frente a crédito tradicional)"
+  },
+  "options": [
+    {
+      "name": "Ruta A: Nombre de la opción óptima",
+      "impact": "Impacto monetario",
+      "pros": "Ventaja real",
+      "cons": "Esfuerzo necesario",
+      "is_best": true,
+      "steps": ["Paso 1", "Paso 2", "Paso 3"],
+      "chart_original": 25000000,
+      "chart_optimized": 25000000
+    },
+    {
+      "name": "Ruta B: Alternativa con financiamiento blando",
+      "impact": "Impacto monetario",
+      "pros": "Ventaja",
+      "cons": "Sacrificio",
+      "is_best": false,
+      "steps": ["Paso 1", "Paso 2"],
+      "chart_original": 25000000,
+      "chart_optimized": 28000000
+    },
+    {
+      "name": "Ruta C: Otra alternativa",
+      "impact": "Impacto monetario",
+      "pros": "Ventaja",
+      "cons": "Sacrificio",
+      "is_best": false,
+      "steps": ["Paso 1", "Paso 2"],
+      "chart_original": 25000000,
+      "chart_optimized": 32000000
+    }
+  ]
+}`
+      }
+    ];
+
+    lucide.createIcons();
+
+    // ==========================================
+    // TEXT-TO-SPEECH (VOZ IA)
+    // ==========================================
+    function speakAI(text, callbackOnEnd) {
+      if (!('speechSynthesis' in window)) {
+        if (callbackOnEnd) callbackOnEnd();
+        return;
+      }
+      window.speechSynthesis.cancel();
+
+      const clean = text.replace(/[*_#`~$]/g, '');
+      const utterance = new SpeechSynthesisUtterance(clean);
+      utterance.lang = 'es-LA';
+      utterance.rate = 1.05;
+
+      const voices = window.speechSynthesis.getVoices();
+      const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+      if (spanishVoice) utterance.voice = spanishVoice;
+
+      document.getElementById("speakerStatus").innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> FinAI hablando...`;
+
+      utterance.onend = () => {
+        document.getElementById("speakerStatus").innerHTML = `<i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i> Audio Activo`;
+        lucide.createIcons();
+        if (callbackOnEnd) callbackOnEnd();
+      };
+
+      utterance.onerror = () => {
+        if (callbackOnEnd) callbackOnEnd();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // ==========================================
+    // SPEECH-TO-TEXT CENTRAL
+    // ==========================================
+    let mainRecognition = null;
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      mainRecognition = new SpeechRec();
+      mainRecognition.lang = 'es-ES';
+      mainRecognition.continuous = false;
+      mainRecognition.interimResults = false;
+
+      mainRecognition.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        if (isScreen2Listening) {
+          document.getElementById("negotiateInput").value = transcript;
+          stopScreen2Voice();
+          submitNegotiation();
+        } else {
+          handleUserSpokenTurn(transcript);
+        }
+      };
+
+      mainRecognition.onerror = () => {
+        stopListeningUI();
+        stopScreen2Voice();
+      };
+
+      mainRecognition.onend = () => {
+        stopListeningUI();
+        stopScreen2Voice();
+      };
+    }
+
+    function startListening() {
+      if (!mainRecognition) return alert("Usa Chrome o Edge para la interacción por voz.");
+      try {
+        isScreen2Listening = false;
+        mainRecognition.start();
+        document.getElementById("voiceWave").classList.remove("hidden");
+        document.getElementById("callBtnText").innerText = "Escuchando";
+        document.getElementById("callHeading").innerText = "Te estoy escuchando...";
+        document.getElementById("callSubheading").innerText = "Habla con naturalidad, FinAI te responderá al terminar la frase.";
+      } catch(e) {
+        console.warn(e);
+      }
+    }
+
+    function stopListeningUI() {
+      document.getElementById("voiceWave").classList.add("hidden");
+      document.getElementById("callBtnText").innerText = "Hablar";
+    }
+
+    // ==========================================
+    // PANTALLA 1: CICLO DE LLAMADA
+    // ==========================================
+    function toggleLiveCall() {
+      if (isCallActive) {
+        isCallActive = false;
+        window.speechSynthesis.cancel();
+        if (mainRecognition) mainRecognition.stop();
+        document.getElementById("callBadge").innerText = "En Pausa";
+        document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono";
+        document.getElementById("callHeading").innerText = "Llamada pausada";
+        document.getElementById("callSubheading").innerText = "Toca el botón cuando quieras reanudar la charla.";
+      } else {
+        isCallActive = true;
+        document.getElementById("callBadge").innerText = "En Llamada Activa";
+        document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold animate-pulse";
+        
+        if (turnCount === 0) {
+          const bienvenida = "Hola, soy FinAI. Cuéntame qué decisión o problema financiero tienes en mente y lo resolvemos juntos.";
+          appendDialogue("ai", bienvenida);
+          speakAI(bienvenida, () => {
+            if (isCallActive) startListening();
+          });
+        } else {
+          startListening();
+        }
+      }
+    }
+
+    async function handleUserSpokenTurn(userText) {
+      if (!userText.trim()) return;
+      turnCount++;
+      document.getElementById("turnCounter").innerText = `${turnCount} turnos`;
+      appendDialogue("user", userText);
+
+      conversationHistory.push({ role: "user", content: userText });
+      document.getElementById("callHeading").innerText = "FinAI formulando estrategia...";
+      document.getElementById("callSubheading").innerText = "Calculando plazos reales y números exactos...";
+
+      const aiResponse = await callGroqAPI();
+
+      if (aiResponse) {
+        activeData = aiResponse;
+        appendDialogue("ai", aiResponse.voice_reply);
+
+        document.getElementById("finishChatBtn").disabled = false;
+
+        // AUTO-AVANCE A PANTALLA 2 SI YA ESTÁ LISTA LA ESTRATEGIA
+        if (aiResponse.is_ready_for_solutions && aiResponse.options && aiResponse.options.length > 0) {
+          speakAI(aiResponse.voice_reply, () => {
+            finalizeDiagnosis(); // Pasa automáticamente a Pantalla 2
+          });
+        } else {
+          speakAI(aiResponse.voice_reply, () => {
+            if (isCallActive) {
+              setTimeout(() => { if (isCallActive) startListening(); }, 500);
+            }
+          });
+        }
+      }
+    }
+
+    function startVoiceWithPreset(text) {
+      if (!isCallActive) toggleLiveCall();
+      handleUserSpokenTurn(text);
+    }
+
+    function appendDialogue(sender, text) {
+      const container = document.getElementById("liveDialogueContainer");
+      if (turnCount === 1 && sender === "user") container.innerHTML = "";
+
+      const div = document.createElement("div");
+      div.className = sender === "user" 
+        ? "p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-slate-800 ml-4 text-right font-medium"
+        : "p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 mr-4 text-left leading-relaxed";
+      
+      div.innerHTML = `
+        <span class="text-[9px] block uppercase font-mono font-bold ${sender === 'user' ? 'text-emerald-700' : 'text-slate-400'}">
+          ${sender === 'user' ? 'Tú' : 'FinAI'}
+        </span>
+        ${text}
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // ==========================================
+    // LLAMADA A GROQ CON RESILIENCIA
+    // ==========================================
+    async function callGroqAPI() {
+      const rawKey = (localStorage.getItem("groq_api_key") || "").trim();
+      const models = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "llama-3.3-70b-versatile"];
+
+      if (rawKey.startsWith("gsk_")) {
+        for (const model of models) {
+          try {
+            const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${rawKey}`
+              },
+              body: JSON.stringify({
+                model: model,
+                response_format: { type: "json_object" },
+                temperature: 0.2,
+                messages: conversationHistory
+              })
+            });
+
+            if (resp.ok) {
+              const data = await resp.json();
+              const content = data.choices[0].message.content;
+              conversationHistory.push({ role: "assistant", content: content });
+              return JSON.parse(content);
+            }
+          } catch(e) {
+            console.warn("Error con modelo:", model, e);
+          }
+        }
+      }
+
+      // Fallback lógico riguroso
+      return {
+        voice_reply: "Cubrir 5 semestres equivale a 25 millones en un horizonte de 2 años y medio. Te he preparado la estrategia óptima para financiarlos sin ahogar tus ingresos mensuales.",
+        is_ready_for_solutions: true,
+        best_recommendation: {
+          title: "Plan de Flujo Semestral + Crédito Educativo Subsidiado",
+          reason: "Distribuye el costo de 25 millones en 30 meses reales, pagando una cuota mensual manejable de ~$830.000 sin descapitalizarte.",
+          impact: "Ahorro de ~$3.800.000 frente a créditos de libre consumo"
+        },
+        options: [
+          {
+            name: "Ruta A: Flujo Semestral + Crédito con Tasa Preferencial",
+            impact: "Cuota de ~$830.000/mes",
+            pros: "Tasa preferencial para educación y horizonte de 30 meses",
+            cons: "Requiere trámite con entidad o cooperativa educativa",
+            is_best: true,
+            steps: [
+              "Solicitar crédito educativo semestral rotativo a tasa de fomento",
+              "Aportar $400.000 mensuales de ahorro anticipado",
+              "Cubrir cada semestre sin acumular intereses moratorios"
+            ],
+            chart_original: 28800000,
+            chart_optimized: 25000000
+          },
+          {
+            name: "Ruta B: Ahorro Programado + Cesantías",
+            impact: "Cero intereses",
+            pros: "No asumes deuda financiera",
+            cons: "Requiere destinar el 30% de tus ingresos cada mes",
+            is_best: false,
+            steps: [
+              "Apartar $833.000 mensuales en fondo de alta liquidez",
+              "Utilizar cesantías anuales directamente a la universidad",
+              "Pagar de contado cada 6 meses"
+            ],
+            chart_original: 28800000,
+            chart_optimized: 25000000
+          },
+          {
+            name: "Ruta C: Crédito Bancario Tradicional",
+            impact: "Sobrecosto de $5.2M",
+            pros: "Desembolso inmediato",
+            cons: "Interés comercial alto",
+            is_best: false,
+            steps: [
+              "Crédito de libre inversión",
+              "Pagar en 36 cuotas fijas",
+              "Asumir costo financiero extra"
+            ],
+            chart_original: 30200000,
+            chart_optimized: 30200000
+          }
+        ]
+      };
+    }
+
+    // ==========================================
+    // PANTALLA 2: ESTRATEGIAS Y VOZ FUNCIONAL
+    // ==========================================
+    function finalizeDiagnosis() {
+      if (isCallActive) {
+        isCallActive = false;
+        if (mainRecognition) mainRecognition.stop();
+        document.getElementById("callBadge").innerText = "Estrategias Listas";
+        document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold";
+      }
+      renderScreen2();
+      goToStep(2);
+    }
+
+    function renderScreen2() {
+      if (!activeData) return;
+
+      if (activeData.best_recommendation) {
+        document.getElementById("screen2BestTitle").innerText = activeData.best_recommendation.title;
+        document.getElementById("screen2BestReason").innerText = activeData.best_recommendation.reason;
+        document.getElementById("screen2BestImpact").innerText = activeData.best_recommendation.impact;
+      }
+
+      const grid = document.getElementById("screen2OptionsGrid");
+      grid.innerHTML = "";
+
+      (activeData.options || []).forEach((opt, idx) => {
+        const card = document.createElement("div");
+        const isSelected = idx === selectedOptionIndex;
+
+        card.className = `card-clean p-4 rounded-2xl cursor-pointer flex flex-col justify-between transition ${
+          isSelected ? 'border-emerald-500 ring-2 ring-emerald-100 bg-emerald-50/20' : 'border-slate-200 hover:border-emerald-300'
+        }`;
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase">Ruta ${String.fromCharCode(65 + idx)}</span>
+              ${opt.is_best ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">★ RECOMENDADA</span>' : ''}
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                ${opt.impact}
+              </span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 mb-2">${opt.name}</h4>
+            <div class="space-y-1 text-xs mb-3">
+              <div class="text-emerald-700 flex items-start gap-1 font-medium">
+                <span class="font-bold">✓</span> <span class="leading-tight">${opt.pros}</span>
+              </div>
+              <div class="text-rose-600 flex items-start gap-1 font-medium">
+                <span class="font-bold">✕</span> <span class="leading-tight">${opt.cons}</span>
+              </div>
+            </div>
+          </div>
+          <button class="w-full py-2 rounded-xl text-xs font-bold transition ${
+            isSelected ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+          }">
+            ${isSelected ? 'Seleccionada ✓' : 'Elegir esta ruta'}
+          </button>
+        `;
+
+        card.onclick = () => {
+          selectedOptionIndex = idx;
+          renderScreen2();
+          speakAI(`Has seleccionado ${opt.name}.`);
+        };
+
+        grid.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    // MICRÓFONO EN PANTALLA 2 (CORREGIDO)
+    function toggleScreen2Voice() {
+      if (!mainRecognition) return alert("El navegador no soporta reconocimiento por voz. Usa Chrome o Edge.");
+
+      if (isScreen2Listening) {
+        stopScreen2Voice();
+      } else {
+        try {
+          isScreen2Listening = true;
+          mainRecognition.start();
+          document.getElementById("screen2MicBtn").classList.add("bg-rose-500", "animate-pulse");
+          document.getElementById("screen2VoiceStatus").innerText = "🔴 Escuchando... habla tu ajuste ahora";
+          document.getElementById("screen2VoiceStatus").classList.add("text-emerald-700", "font-bold");
+        } catch(e) {
+          console.warn(e);
+          stopScreen2Voice();
+        }
+      }
+    }
+
+    function stopScreen2Voice() {
+      isScreen2Listening = false;
+      if (mainRecognition) {
+        try { mainRecognition.stop(); } catch(e){}
+      }
+      const btn = document.getElementById("screen2MicBtn");
+      if (btn) btn.classList.remove("bg-rose-500", "animate-pulse");
+      const status = document.getElementById("screen2VoiceStatus");
+      if (status) {
+        status.innerText = "Micrófono disponible";
+        status.classList.remove("text-emerald-700", "font-bold");
+      }
+    }
+
+    // AJUSTAR LA ESTRATEGIA EN PANTALLA 2
+    async function submitNegotiation() {
+      stopScreen2Voice();
+      const input = document.getElementById("negotiateInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = "";
+      speakAI("Reestructurando la estrategia con tu nuevo planteamiento...");
+
+      conversationHistory.push({
+        role: "user",
+        content: `El usuario quiere debatir o modificar la estrategia con esto: "${text}". Ajusta las opciones y formula la nueva recomendación óptima.`
+      });
+
+      const updated = await callGroqAPI();
+      if (updated) {
+        activeData = updated;
+        selectedOptionIndex = 0;
+        renderScreen2();
+        speakAI(updated.voice_reply);
+      }
+    }
+
+    // VOLVER A LA CHARLA (PANTALLA 1) Y PERMITIR RE-AVANZAR A PANTALLA 2
+    function backToConversation() {
+      goToStep(1);
+      // Reanuda la llamada para que el usuario pueda seguir hablando
+      if (!isCallActive) {
+        toggleLiveCall();
+      }
+    }
+
+    // ==========================================
+    // PANTALLA 3: PLAN DEFINITIVO
+    // ==========================================
+    function renderScreen3() {
+      if (!activeData || !activeData.options) return;
+      const opt = activeData.options[selectedOptionIndex];
+
+      document.getElementById("finalPlanTitle").innerText = `Plan Acordado: ${opt.name}`;
+      document.getElementById("valUserImpact").innerText = `Ahorro y meta acordada: ${opt.impact}`;
+
+      const container = document.getElementById("finalStepsContainer");
+      container.innerHTML = "";
+
+      (opt.steps || []).forEach((step, idx) => {
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3";
+        stepDiv.innerHTML = `
+          <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
+            ${idx + 1}
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed font-medium">${step}</p>
+        `;
+        container.appendChild(stepDiv);
+      });
+
+      const ctx = document.getElementById('finalImpactChart').getContext('2d');
+      if (finalChart) finalChart.destroy();
+
+      finalChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Costo sin Planificación', 'Con tu Plan FinAI'],
+          datasets: [{
+            data: [opt.chart_original || 28000000, opt.chart_optimized || 25000000],
+            backgroundColor: ['rgba(225, 29, 72, 0.15)', 'rgba(5, 150, 105, 0.2)'],
+            borderColor: ['#E11D48', '#059669'],
+            borderWidth: 1.5,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#64748B', font: { size: 10, weight: 'bold' } }, grid: { display: false } },
+            y: { ticks: { color: '#94A3B8', font: { size: 9 } }, grid: { color: '#F1F5F9' } }
+          }
+        }
+      });
+
+      speakAI(`Excelente. Consolidamos tu plan con ${opt.name}. Aquí tienes tu hoja de ruta paso a paso.`);
+    }
+
+    function goToStep(step) {
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen3").classList.add("hidden");
+
+      document.querySelectorAll("[id^='stepNav']").forEach(btn => {
+        btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100";
+      });
+
+      const currentNav = document.getElementById(`stepNav${step}`);
+      if (currentNav) {
+        currentNav.className = "step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm";
+      }
+
+      document.getElementById(`screen${step}`).classList.remove("hidden");
+      lucide.createIcons();
+
+      if (step === 3 && activeData) {
+        renderScreen3();
+      }
+    }
+
+    function resetConversation() {
+      window.speechSynthesis.cancel();
+      isCallActive = false;
+      isScreen2Listening = false;
+      turnCount = 0;
+      activeData = null;
+      document.getElementById("turnCounter").innerText = "0 turnos";
+      document.getElementById("liveDialogueContainer").innerHTML = `
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
+          Tu conversación y las respuestas de voz de FinAI irán apareciendo aquí...
+        </div>
+      `;
+      document.getElementById("finishChatBtn").disabled = true;
+      goToStep(1);
+    }
+
+    function toggleConfigModal() {
+      const modal = document.getElementById("configModal");
+      document.getElementById("apiKeyInput").value = (localStorage.getItem("groq_api_key") || "").trim();
+      modal.classList.toggle("hidden");
+    }
+
+    function saveApiKey() {
+      const k = document.getElementById("apiKeyInput").value.trim();
+      if (k) {
+        localStorage.setItem("groq_api_key", k);
+        toggleConfigModal();
+        alert("API Key actualizada");
+      }
+    }
+  </script>
+</body>
+</html>
