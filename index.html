@@ -70,9 +70,9 @@
         </div>
         <div>
           <div class="font-bold tracking-tight text-slate-900 flex items-center gap-2 text-sm md:text-base">
-            FINAI <span id="modelIndicator" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">Groq Llama-3.3</span>
+            FINAI <span id="modelIndicator" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">Groq GPT-OSS 120B</span>
           </div>
-          <div class="text-[10px] text-slate-500">Motor de Decisiones Financieras Cotidianas</div>
+          <div class="text-[10px] text-slate-500">Motor de Decisiones Financieras por Voz</div>
         </div>
       </div>
 
@@ -94,10 +94,15 @@
         </button>
       </div>
 
-      <!-- Botón Config Key -->
-      <button onclick="toggleConfigModal()" class="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 border border-slate-200 transition" title="Configuración de Clave">
-        <i data-lucide="settings" class="w-4 h-4"></i>
-      </button>
+      <!-- Controles: Voz y Configuración -->
+      <div class="flex items-center gap-2">
+        <button id="ttsToggleBtn" onclick="toggleVoiceOutput()" class="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition" title="Activar/Desactivar Voz de FinAI">
+          <i id="ttsIcon" data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+        <button onclick="toggleConfigModal()" class="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 border border-slate-200 transition" title="Configuración de Clave">
+          <i data-lucide="settings" class="w-4 h-4"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -129,7 +134,7 @@
           <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider font-mono">Paso 1 de 3</span>
           <h2 class="text-xl md:text-2xl font-bold text-slate-900 mt-1">¿Qué decisión o problema financiero tienes hoy?</h2>
           <p class="text-xs text-slate-500 mt-1">
-            FinAI desglosará tasas, costos ocultos y diseñará alternativas viables en milisegundos.
+            Puedes escribir o presionar el micrófono para hablar directamente. FinAI te responderá con voz.
           </p>
         </div>
 
@@ -139,14 +144,20 @@
             <textarea 
               id="userProblem" 
               rows="3" 
-              placeholder="Ej: Tengo una deuda de $5.000.000 en la tarjeta con interés del 29% y pago $300k de mínimo pero no baja. Gano $3.200.000 al mes y no sé cómo salir de esto..." 
-              class="w-full bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-100 rounded-xl p-3.5 text-sm text-slate-800 placeholder-slate-400 outline-none transition resize-none"
+              placeholder="Habla o escribe: Ej. 'Tengo una deuda de cinco millones en la tarjeta al 29% y el pago mínimo no la baja...'" 
+              class="w-full bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-100 rounded-xl p-3.5 pr-14 text-sm text-slate-800 placeholder-slate-400 outline-none transition resize-none"
             ></textarea>
             
-            <button type="button" id="voiceBtn" onclick="toggleSpeech()" class="absolute bottom-3 right-3 p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 transition shadow-sm" title="Hablar por micrófono">
-              <i data-lucide="mic" class="w-4 h-4"></i>
-              <span id="recordingPulse" class="hidden absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            <button type="button" id="voiceBtn" onclick="toggleSpeech()" class="absolute bottom-3 right-3 p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-700 transition shadow-sm flex items-center justify-center" title="Hablar con FinAI">
+              <i data-lucide="mic" class="w-5 h-5"></i>
+              <span id="recordingPulse" class="hidden absolute -top-1 -right-1 w-3 h-3 rounded-full bg-rose-500 animate-ping"></span>
             </button>
+          </div>
+
+          <!-- Indicador de escucha en vivo -->
+          <div id="voiceStatus" class="hidden text-xs text-emerald-700 font-medium flex items-center gap-1.5 pl-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+            Escuchando tu voz... habla ahora.
           </div>
 
           <!-- Campos rápidos opcionales -->
@@ -181,15 +192,21 @@
     <!-- ============================================== -->
     <div id="screen2" class="hidden space-y-4">
       
-      <!-- Card Diagnóstico de Raíz -->
+      <!-- Card Diagnóstico de Raíz con botón de repetición de voz -->
       <div class="card-clean rounded-2xl p-4 md:p-5">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700">
             <i data-lucide="scan" class="w-4 h-4 text-sky-600"></i> Diagnóstico de Causa Raíz
           </div>
-          <span id="screen2RiskBadge" class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200">
-            ALTO RIESGO
-          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="repeatSpeech()" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition flex items-center gap-1 text-[11px] font-medium" title="Repetir audio">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+              <span>Escuchar de nuevo</span>
+            </button>
+            <span id="screen2RiskBadge" class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200">
+              ALTO RIESGO
+            </span>
+          </div>
         </div>
         <p id="screen2RootCause" class="text-sm text-slate-800 font-semibold mb-1">
           Analizando situación...
@@ -341,8 +358,53 @@
     let activeData = null;
     let selectedOptionIndex = 0;
     let impactChart = null;
+    let voiceOutputEnabled = true;
+    let lastSpokenText = "";
 
     lucide.createIcons();
+
+    // Configuración del motor Text-to-Speech (TTS)
+    function speakText(text) {
+      if (!voiceOutputEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      lastSpokenText = text;
+
+      const clean = text.replace(/[*_#`~$]/g, '');
+      const utterance = new SpeechSynthesisUtterance(clean);
+      utterance.lang = 'es-LA';
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+
+      // Intentar elegir una voz en español clara
+      const voices = window.speechSynthesis.getVoices();
+      const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+      if (spanishVoice) utterance.voice = spanishVoice;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleVoiceOutput() {
+      voiceOutputEnabled = !voiceOutputEnabled;
+      const btn = document.getElementById("ttsToggleBtn");
+      const icon = document.getElementById("ttsIcon");
+
+      if (voiceOutputEnabled) {
+        btn.className = "p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition";
+        icon.setAttribute("data-lucide", "volume-2");
+        speakText("Voz de FinAI activada.");
+      } else {
+        window.speechSynthesis.cancel();
+        btn.className = "p-2 rounded-lg bg-slate-100 text-slate-400 hover:bg-slate-200 border border-slate-200 transition";
+        icon.setAttribute("data-lucide", "volume-x");
+      }
+      lucide.createIcons();
+    }
+
+    function repeatSpeech() {
+      if (lastSpokenText) {
+        speakText(lastSpokenText);
+      }
+    }
 
     // Control de Flujo de 3 Pasos (Requisito 01)
     function goToStep(step) {
@@ -403,13 +465,16 @@
       }
     }
 
-    // Dictado por voz
+    // Dictado por voz (Speech to Text)
     let recognition = null;
     let isRecording = false;
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRec();
       recognition.lang = 'es-ES';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
       recognition.onresult = (e) => {
         document.getElementById("userProblem").value = e.results[0][0].transcript;
         stopVoice();
@@ -420,20 +485,34 @@
 
     function toggleSpeech() {
       if (!recognition) return alert("El navegador no soporta reconocimiento por voz. Usa Chrome o Edge.");
-      if (isRecording) { recognition.stop(); stopVoice(); }
-      else { recognition.start(); isRecording = true; document.getElementById("recordingPulse").classList.remove("hidden"); }
+      if (isRecording) { 
+        recognition.stop(); 
+        stopVoice(); 
+      } else { 
+        try {
+          recognition.start(); 
+          isRecording = true; 
+          document.getElementById("recordingPulse").classList.remove("hidden"); 
+          document.getElementById("voiceStatus").classList.remove("hidden");
+        } catch(err) {
+          console.error(err);
+          stopVoice();
+        }
+      }
     }
     function stopVoice() {
       isRecording = false;
       document.getElementById("recordingPulse").classList.add("hidden");
+      document.getElementById("voiceStatus").classList.add("hidden");
     }
 
-    // Generador offline de respaldo (Garantiza que la demo jamás se caiga)
+    // Motor de respaldo (Garantiza que la demo nunca falle en el pitch)
     function generateFallbackAnalysis(problem, income, target) {
       return {
-        root_cause: "Costo financiero excesivo por tasa de usura e iliquidez provocada por pagos mínimos.",
+        root_cause: "Costo financiero crítico por tasa de usura e iliquidez provocada por pagos mínimos.",
         risk_level: "ALTO",
         shock_stat: "Pagarás más del 40% del valor total únicamente en intereses ocultos.",
+        voice_summary: "He detectado que tu principal problema es el costo excesivo de los intereses y la falta de amortización a capital. Te recomiendo optar por una compra de cartera con tasa preferencial, con la cual recuperarás más de un millón cuatrocientos mil pesos.",
         options: [
           {
             name: "Ruta A: Compra de Cartera Bancaria",
@@ -478,10 +557,10 @@
       };
     }
 
-    // PROCESAMIENTO IA CON GROQ (CON RESILIENCIA A FALLOS)
+    // PROCESAMIENTO IA CON GROQ (MODELOS EXACTOS DE TU PROYECTO)
     async function processAIAnalysis() {
       const problem = document.getElementById("userProblem").value.trim();
-      if (!problem) return alert("Por favor escribe tu duda o problema o selecciona un preset.");
+      if (!problem) return alert("Por favor escribe tu duda o problema o presiona el micrófono para hablar.");
 
       const income = document.getElementById("inputIncome").value || "$3.200.000";
       const fixed = document.getElementById("inputFixed").value || "$1.800.000";
@@ -491,14 +570,21 @@
       btn.disabled = true;
       btn.innerHTML = `<span class="animate-spin mr-2">⚙️</span> Procesando en Groq...`;
 
-      const prompt = `Analiza este problema financiero cotidiano:
-Problema: "${problem}"
-Ingreso mensual: ${income}, Gastos fijos: ${fixed}, Monto/Deuda: ${target}.
-Genera causa raíz, riesgo, shock_stat y 3 opciones estratégicas comparables.`;
+      const prompt = `Analiza este problema financiero:
+Situación: "${problem}"
+Ingreso mensual: ${income}, Gastos fijos: ${fixed}, Monto/Deuda en juego: ${target}.
+Genera diagnóstico, nivel de riesgo, dato shock, resumen hablado para voz (voice_summary) y 3 opciones estratégicas comparables.`;
 
       const rawKey = (localStorage.getItem("groq_api_key") || "").trim();
 
-      const candidateModels = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+      // Modelos de tu consola Groq
+      const candidateModels = [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "groq/compound-mini",
+        "llama-3.3-70b-versatile"
+      ];
+
       let success = false;
 
       if (rawKey.startsWith("gsk_")) {
@@ -517,11 +603,12 @@ Genera causa raíz, riesgo, shock_stat y 3 opciones estratégicas comparables.`;
                 messages: [
                   {
                     role: "system",
-                    content: `Eres el motor analítico de FINAI. Devuelve SIEMPRE JSON ESTRICTO con este formato:
+                    content: `Eres FINAI, el copiloto financiero inteligente. Devuelve SIEMPRE JSON ESTRICTO con este formato:
 {
-  "root_cause": "Explicación directa de la causa raíz",
+  "root_cause": "Explicación directa y profesional de la causa raíz",
   "risk_level": "ALTO" | "MEDIO" | "BAJO",
-  "shock_stat": "Cifra o dato de impacto financiero",
+  "shock_stat": "Cifra de impacto financiero (ej: 'Pagarás más de $2.1M solo en intereses')",
+  "voice_summary": "Mensaje corto en español de 2 frases para ser leído por voz al usuario con el diagnóstico y la mejor solución.",
   "options": [
     {
       "name": "Nombre opción A",
@@ -562,21 +649,21 @@ Genera causa raíz, riesgo, shock_stat y 3 opciones estratégicas comparables.`;
               const data = await response.json();
               if (data.choices && data.choices[0] && data.choices[0].message) {
                 activeData = JSON.parse(data.choices[0].message.content);
-                document.getElementById("modelIndicator").innerText = `Groq ${model}`;
+                document.getElementById("modelIndicator").innerText = `Groq ${model.replace('openai/', '')}`;
                 success = true;
                 break;
               }
             } else {
-              console.warn(`Fallo con ${model} (HTTP ${response.status})`);
+              console.warn(`Intento con ${model} falló con HTTP ${response.status}`);
             }
           } catch (e) {
-            console.warn(`Error de red al llamar a ${model}`, e);
+            console.warn(`Error llamando al modelo ${model}`, e);
           }
         }
       }
 
       if (!success) {
-        console.warn("Utilizando motor heurístico de respaldo para la demo.");
+        console.warn("Utilizando motor heurístico de respaldo.");
         activeData = generateFallbackAnalysis(problem, income, target);
         document.getElementById("modelIndicator").innerText = "Modo Demo Activo";
       }
@@ -584,6 +671,13 @@ Genera causa raíz, riesgo, shock_stat y 3 opciones estratégicas comparables.`;
       selectedOptionIndex = 0;
       renderScreen2();
       goToStep(2);
+
+      // Reproducir voz con el análisis en tiempo real
+      if (activeData && activeData.voice_summary) {
+        speakText(activeData.voice_summary);
+      } else if (activeData) {
+        speakText(`He analizado tu situación. La causa principal es ${activeData.root_cause}. Te presento tres opciones de solución.`);
+      }
 
       btn.disabled = false;
       btn.innerHTML = `<span>Analizar con FinAI en Groq</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
@@ -642,6 +736,7 @@ Genera causa raíz, riesgo, shock_stat y 3 opciones estratégicas comparables.`;
         card.onclick = () => {
           selectedOptionIndex = idx;
           renderScreen2();
+          speakText(`Has seleccionado ${opt.name}. Este camino te permite lograr ${opt.impact}.`);
         };
 
         grid.appendChild(card);
