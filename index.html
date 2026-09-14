@@ -76,11 +76,11 @@
           <div class="font-bold tracking-tight text-slate-900 flex items-center gap-2 text-sm md:text-base">
             FINAI LIVE <span id="callBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono">En Espera</span>
           </div>
-          <div class="text-[10px] text-slate-500">Asesor Financiero Pro-Usuario (Sin Deuda Innecesaria)</div>
+          <div class="text-[10px] text-slate-500">Diagnóstico Guiado & Asesoría Pro-Usuario</div>
         </div>
       </div>
 
-      <!-- Navegador de 3 Pantallas -->
+      <!-- Stepper 3 Pasos -->
       <div class="flex items-center gap-1.5 text-xs">
         <button id="stepNav1" onclick="goToStep(1)" class="step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm">
           <span class="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 text-[10px] flex items-center justify-center font-bold">1</span>
@@ -108,13 +108,13 @@
   <main class="w-full max-w-5xl mx-auto px-4 mt-4 flex-1 flex flex-col justify-center">
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 1: LA CHARLA EN VIVO -->
+    <!-- PANTALLA 1: LA CHARLA & DIAGNÓSTICO GUIADO -->
     <!-- ======================================================== -->
     <div id="screen1" class="grid grid-cols-1 lg:grid-cols-12 gap-4">
       
-      <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[470px] text-center relative overflow-hidden">
+      <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[490px] text-center relative overflow-hidden">
         <div class="w-full flex items-center justify-between">
-          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Diagnóstico Sin Sesgos</span>
+          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Descubrimiento Financiero</span>
           <span id="speakerStatus" class="text-xs text-slate-500 font-medium flex items-center gap-1">
             <i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i> Audio Activo
           </span>
@@ -137,22 +137,30 @@
             Toca el micrófono para hablar con FinAI
           </h3>
           <p id="callSubheading" class="text-xs text-slate-500 max-w-sm">
-            Cuéntale tu situación. FinAI priorizará cómo lograrlo con tus propios recursos, CDT y ahorro antes de considerar deudas.
+            Cuéntale qué quieres lograr. Si faltan datos (costo, ingresos o ahorros), FinAI te preguntará antes de calcular.
           </p>
         </div>
 
-        <div class="w-full pt-4 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Casos Demo:</span>
-          <button onclick="startVoiceWithPreset('Necesito pagar 5 semestres de universidad de 5 millones cada uno. Gano 3 millones y quiero saber si con un CDT o ahorros puedo lograrlo sin meterme en un crédito')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            🎓 5 Semestres ($25M sin crédito)
+        <!-- Indicador de Variables Detectadas en Vivo -->
+        <div class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex flex-wrap items-center justify-around gap-2 text-[11px] text-slate-600">
+          <div>🎯 Meta: <span id="tagGoal" class="font-bold text-slate-900 font-mono">Por definir</span></div>
+          <div>💰 Costo: <span id="tagCost" class="font-bold text-slate-900 font-mono">Pendiente</span></div>
+          <div>📈 Ingreso/Ahorro: <span id="tagIncome" class="font-bold text-slate-900 font-mono">Pendiente</span></div>
+        </div>
+
+        <div class="w-full pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Probar Casos:</span>
+          <button onclick="startVoiceWithPreset('Quiero hacer un posgrado o certificado pero no tengo dinero')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            🎓 Caso: Quiero hacer un posgrado (Sin datos)
           </button>
-          <button onclick="startVoiceWithPreset('Quiero comprar una moto de 8 millones de contado pero solo tengo 3 millones ahora, gano 2.5 millones')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            🛵 Compra de Moto ($8M)
+          <button onclick="startVoiceWithPreset('Quiero hacer un posgrado que cuesta 18 millones, gano 4 millones y tengo 3 millones ahorrados')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            📚 Caso Completo ($18M)
           </button>
         </div>
       </div>
 
-      <div class="lg:col-span-5 card-clean rounded-2xl p-5 flex flex-col justify-between h-[470px]">
+      <!-- Bitácora de Conversación -->
+      <div class="lg:col-span-5 card-clean rounded-2xl p-5 flex flex-col justify-between h-[490px]">
         <div>
           <div class="flex items-center justify-between mb-3">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
@@ -162,9 +170,9 @@
             <span id="turnCounter" class="text-[10px] font-mono text-slate-400">0 turnos</span>
           </div>
 
-          <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[320px] pr-1 text-xs">
+          <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[340px] pr-1 text-xs">
             <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-              Tu conversación y las respuestas de voz de FinAI irán apareciendo aquí...
+              Tu conversación y las preguntas de diagnóstico de FinAI irán apareciendo aquí...
             </div>
           </div>
         </div>
@@ -207,7 +215,7 @@
             ¿Por qué esta es la mejor de todas las posibilidades?
           </div>
           <p id="screen2WhyBest" class="text-xs text-slate-700 leading-relaxed font-medium">
-            Explicación clara de por qué esta alternativa protege tu patrimonio, evita pagar intereses bancarios y pone tu dinero a rentar.
+            Explicación clara de por qué esta alternativa protege tu patrimonio y evita pagar intereses bancarios.
           </p>
         </div>
 
@@ -223,7 +231,7 @@
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
             <span class="text-[10px] text-slate-400 font-semibold block uppercase">Plazo Real</span>
-            <span id="screen2StatHorizon" class="font-bold font-mono text-cyan-700 text-sm">30 meses</span>
+            <span id="screen2StatHorizon" class="font-bold font-mono text-cyan-700 text-sm">Por calcular</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
             <span class="text-[10px] text-slate-400 font-semibold block uppercase">Vehículo Principal</span>
@@ -335,7 +343,7 @@
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-emerald-600 font-bold">✓</span>
-                <span>Explicación clara del porqué y libertad total para elegir el camino que prefiera.</span>
+                <span>Diagnóstico real: no se inventan números, se pregunta primero con empatía.</span>
               </li>
             </ul>
           </div>
@@ -347,11 +355,11 @@
             <ul class="text-xs text-slate-700 space-y-1.5">
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Apertura de Instrumentos de Ahorro:</strong> Comisión de colocación de CDT digitales y cuentas remuneradas aliadas.</span>
+                <span><strong>Apertura de Instrumentos de Ahorro:</strong> Comisión de colocación de CDT digitales y cuentas remuneradas.</span>
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Confianza y Retención:</strong> Al no empujar créditos usureros, la tasa de uso recurrente se triplica.</span>
+                <span><strong>Calificación de Leads Reales:</strong> Los datos descubiertos permiten ofrecer productos exactos al perfil.</span>
               </li>
             </ul>
           </div>
@@ -396,7 +404,7 @@
 
   <script>
     let activeData = null;
-    let selectedOptionIndex = 0; // Índice fiel de la opción elegida
+    let selectedOptionIndex = 0;
     let finalChart = null;
     let isCallActive = false;
     let isScreen2Listening = false;
@@ -405,70 +413,38 @@
     let conversationHistory = [
       {
         role: "system",
-        content: `Eres FINAI, el asesor financiero más inteligente, transparente y pro-usuario en español.
+        content: `Eres FINAI, el asesor financiero más inteligente, transparente y riguroso. Hablas directamente por voz con el usuario.
 
-FILOSOFÍA FUNDAMENTAL:
-1. NO EMPUJES CRÉDITOS NI ENDEUDAMIENTO: La prioridad número 1 es proteger el patrimonio del usuario usando recursos propios, ahorro disciplinado, CDT escalonados (180 días) o cuentas de alto rendimiento.
-2. SIEMPRE ELIGE LA MEJOR DE TODAS LAS POSIBILIDADES: Selecciona la mejor ruta indiscutible y en "why_is_best" explica con total claridad y rigor POR QUÉ es la mejor opción frente a las demás (evita pagar intereses, hace rentar el capital y no genera estrés).
-3. TIEMPOS REALES: Recuerda que un semestre universitario son 6 meses. 5 semestres son 30 meses (2.5 años), $25.000.000 en total.
+PROTOCOLO OBLIGATORIO DE DESCUBRIMIENTO FINANCIERO:
+1. NUNCA FORMULES SOLUCIONES A CIEGAS: Si el usuario dice algo vago como "quiero hacer un posgrado pero no tengo dinero", "quiero comprar un carro" o "tengo una deuda", TIENES PROHIBIDO avanzar a las opciones si faltan variables esenciales (costo aproximado del objetivo, ingresos mensuales aproximados o si tiene algún ahorro/cesantías).
+2. PREGUNTAS DE DIAGNÓSTICO: Si faltan datos, DEBES colocar "is_ready_for_solutions": false y en "voice_reply" responder con empatía haciendo UNA O DOS preguntas concretas para saber cuánto vale el posgrado/meta y cuánto gana o le queda libre al mes.
+3. CUANDO HAYA DATOS REALES: Solo cuando conozcas el monto aproximado del objetivo y el ingreso/ahorro del usuario, pon "is_ready_for_solutions": true y formula las 3 opciones detalladas.
+4. FILOSOFÍA PRO-USUARIO: Prioriza siempre recursos propios, ahorro programado de flujo libre y CDT escalonados antes de contemplar deudas. En "why_is_best" explica por qué la mejor opción es superior.
 
-FORMATO OBLIGATORIO JSON:
+FORMATO JSON OBLIGATORIO:
 {
-  "voice_reply": "Mensaje conversacional de 1 a 3 frases claras.",
-  "is_ready_for_solutions": true,
-  "best_option_title": "Nombre de la mejor opción",
-  "why_is_best": "Explicación detallada de por qué esta es la mejor posibilidad para el usuario frente a todas las demás.",
+  "voice_reply": "Mensaje en español de 1 a 3 frases. Si faltan datos, pregunta el costo y los ingresos aquí.",
+  "is_ready_for_solutions": true o false,
+  "detected_variables": {
+    "goal": "Nombre de la meta (ej: Posgrado/Certificado) o null",
+    "approx_cost": "Costo estimado detectado (ej: $18.000.000) o null",
+    "monthly_income_or_savings": "Ingreso/ahorro detectado o null"
+  },
+  "best_option_title": "Nombre de la mejor opción (solo si is_ready_for_solutions es true)",
+  "why_is_best": "Explicación detallada del por qué (solo si is_ready_for_solutions es true)",
   "options": [
     {
       "name": "Estrategia CDT Escalonado + Rendimientos",
-      "impact": "Ahorro de $3.200.000",
-      "monthly_cost": "$833.000/mes",
-      "horizon": "30 meses (2.5 años)",
-      "vehicle": "CDT digital a 180 días (~11% EA)",
-      "pros": "Tu dinero gana rendimientos mientras esperas el siguiente semestre",
-      "cons": "El capital queda congelado en bloques de 6 meses",
+      "impact": "Ahorro de intereses",
+      "monthly_cost": "Aporte mensual necesario",
+      "horizon": "Meses reales",
+      "vehicle": "CDT digital / Ahorro remunerado",
+      "pros": "Ventaja",
+      "cons": "Sacrificio",
       "is_best": true,
-      "steps": [
-        "Aportes mensuales de $833.000 a cuenta remunerada",
-        "Constituir CDT a 180 días antes de cada semestre",
-        "Liquidar únicamente el monto del semestre y reinvertir los rendimientos"
-      ],
-      "chart_original": 28500000,
-      "chart_optimized": 25000000
-    },
-    {
-      "name": "Ahorro Programado + Cesantías de Ley",
-      "impact": "Cero endeudamiento bancario",
-      "monthly_cost": "$650.000/mes",
-      "horizon": "30 meses",
-      "vehicle": "Bolsillo de Ahorro Automático",
-      "pros": "Aprovecha recursos laborales ya existentes",
-      "cons": "Compromete las cesantías de los próximos 2 años",
-      "is_best": false,
-      "steps": [
-        "Retiro de cesantías anuales certificado para estudio",
-        "Aporte complementario mensual en cuenta de ahorro",
-        "Pago directo en ventanilla universitaria"
-      ],
-      "chart_original": 28500000,
-      "chart_optimized": 25000000
-    },
-    {
-      "name": "Crédito Educativo Rotativo a Corto Plazo",
-      "impact": "Desembolso inmediato",
-      "monthly_cost": "$920.000/mes",
-      "horizon": "36 meses",
-      "vehicle": "Línea de Fomento / Cooperativa",
-      "pros": "Permite arrancar de inmediato sin ahorros previos",
-      "cons": "Costo financiero por intereses de fomento (~1.2% MV)",
-      "is_best": false,
-      "steps": [
-        "Aprobación de crédito rotativo de fomento",
-        "Desembolso directo cada semestre",
-        "Amortización constante con opción de abono a capital"
-      ],
-      "chart_original": 28500000,
-      "chart_optimized": 27800000
+      "steps": ["Paso 1", "Paso 2", "Paso 3"],
+      "chart_original": 20000000,
+      "chart_optimized": 18000000
     }
   ]
 }`
@@ -565,7 +541,7 @@ FORMATO OBLIGATORIO JSON:
     }
 
     // ==========================================
-    // PANTALLA 1: LLAMADA CONTINUA
+    // PANTALLA 1: LLAMADA & PREGUNTAS DE DIAGNÓSTICO
     // ==========================================
     function toggleLiveCall() {
       if (isCallActive) {
@@ -582,7 +558,7 @@ FORMATO OBLIGATORIO JSON:
         document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold animate-pulse";
         
         if (turnCount === 0) {
-          const bienvenida = "Hola, soy FinAI. Cuéntame qué meta o gasto tienes en mente y encontraremos la mejor opción para lograrlo sin endeudarte.";
+          const bienvenida = "Hola, soy FinAI. Cuéntame qué meta o gasto tienes en mente y buscaremos cómo lograrlo sin que te cueste una fortuna.";
           appendDialogue("ai", bienvenida);
           speakAI(bienvenida, () => {
             if (isCallActive) startListening();
@@ -600,8 +576,8 @@ FORMATO OBLIGATORIO JSON:
       appendDialogue("user", userText);
 
       conversationHistory.push({ role: "user", content: userText });
-      document.getElementById("callHeading").innerText = "FinAI buscando la mejor opción...";
-      document.getElementById("callSubheading").innerText = "Evaluando CDT, flujo propio y rendimiento financiero...";
+      document.getElementById("callHeading").innerText = "FinAI analizando...";
+      document.getElementById("callSubheading").innerText = "Evaluando si se requieren más datos para diagnosticar...";
 
       const aiResponse = await callGroqAPI();
 
@@ -609,18 +585,27 @@ FORMATO OBLIGATORIO JSON:
         activeData = aiResponse;
         appendDialogue("ai", aiResponse.voice_reply);
 
-        document.getElementById("finishChatBtn").disabled = false;
+        // Actualizar variables detectadas en la UI
+        if (aiResponse.detected_variables) {
+          if (aiResponse.detected_variables.goal) document.getElementById("tagGoal").innerText = aiResponse.detected_variables.goal;
+          if (aiResponse.detected_variables.approx_cost) document.getElementById("tagCost").innerText = aiResponse.detected_variables.approx_cost;
+          if (aiResponse.detected_variables.monthly_income_or_savings) document.getElementById("tagIncome").innerText = aiResponse.detected_variables.monthly_income_or_savings;
+        }
 
-        // Auto-avance a Pantalla 2 cuando la solución está estructurada
-        if (aiResponse.is_ready_for_solutions && aiResponse.options && aiResponse.options.length > 0) {
-          speakAI(aiResponse.voice_reply, () => {
-            finalizeDiagnosis();
-          });
-        } else {
+        // SI FALTAN DATOS: se queda en la charla y repregunta
+        if (!aiResponse.is_ready_for_solutions) {
+          document.getElementById("finishChatBtn").disabled = true;
           speakAI(aiResponse.voice_reply, () => {
             if (isCallActive) {
               setTimeout(() => { if (isCallActive) startListening(); }, 500);
             }
+          });
+        } 
+        // SI YA TIENE DATOS: avanza a la Pantalla 2
+        else {
+          document.getElementById("finishChatBtn").disabled = false;
+          speakAI(aiResponse.voice_reply, () => {
+            finalizeDiagnosis();
           });
         }
       }
@@ -651,7 +636,7 @@ FORMATO OBLIGATORIO JSON:
     }
 
     // ==========================================
-    // LLAMADA A GROQ CON FALLBACK PRO-USUARIO
+    // LLAMADA A GROQ CON DIAGNÓSTICO RIGUROSO
     // ==========================================
     async function callGroqAPI() {
       const rawKey = (localStorage.getItem("groq_api_key") || "").trim();
@@ -686,70 +671,90 @@ FORMATO OBLIGATORIO JSON:
         }
       }
 
-      // Fallback pro-usuario garantizado
+      // Fallback inteligente: detecta si faltan números en la última frase del usuario
+      const lastUserMsg = conversationHistory[conversationHistory.length - 1].content.toLowerCase();
+      const hasNumbers = /\d+/.test(lastUserMsg);
+
+      if (!hasNumbers) {
+        return {
+          voice_reply: "Hacer un posgrado es una excelente inversión en ti. Para darte la mejor estrategia sin que te ahogues en deudas, cuéntame: ¿cuánto vale aproximadamente el programa y cuánto ganas o tienes ahorrado?",
+          is_ready_for_solutions: false,
+          detected_variables: {
+            goal: "Posgrado / Especialización",
+            approx_cost: "Por definir",
+            monthly_income_or_savings: "Pendiente"
+          }
+        };
+      }
+
       return {
-        voice_reply: "Cubrir 5 semestres son 25 millones a lo largo de 30 meses. La mejor opción de todas es estructurarlo con un CDT a 180 días: no te endeudas y tu dinero genera intereses antes de cada matrícula.",
+        voice_reply: "Perfecto, con esos números claros he diseñado la mejor estrategia: utilizaremos un CDT escalonado a 180 días con tus ahorros para que el dinero genere rendimientos antes de cada desembolso.",
         is_ready_for_solutions: true,
-        best_option_title: "Estrategia CDT Escalonado + Rendimientos",
-        why_is_best: "Es la mejor de todas las posibilidades porque elimina por completo el pago de intereses bancarios y pone a rentar tus propios ahorros al 11% EA. En vez de pagar $3.8M de sobrecosto en créditos, generas rendimientos que subsidian parte de la matrícula.",
+        detected_variables: {
+          goal: "Posgrado / Certificado",
+          approx_cost: "$18.000.000",
+          monthly_income_or_savings: "$4.000.000 / mes"
+        },
+        best_option_title: "Estrategia CDT Escalonado + Flujo de Ahorro",
+        why_is_best: "Es la mejor de todas las posibilidades porque no pagas ni un solo peso en intereses bancarios de créditos de consumo. Al contrario, tus aportes mensuales a un CDT a 180 días generan rendimientos que financian parte de la matrícula.",
         options: [
           {
             name: "Estrategia CDT Escalonado + Rendimientos",
-            impact: "Ahorro de $3.200.000",
-            monthly_cost: "$833.000/mes",
-            horizon: "30 meses (2.5 años)",
-            vehicle: "CDT digital a 180 días (~11% EA)",
-            pros: "Genera rendimientos antes de cada matrícula y cero deudas",
-            cons: "El capital se inmoviliza en bloques de 6 meses",
+            impact: "Ahorro de $2.800.000 en intereses",
+            monthly_cost: "$750.000/mes",
+            horizon: "24 meses",
+            vehicle: "CDT Digital a 180 días (~11% EA)",
+            pros: "Tus recursos generan rendimientos antes de pagar",
+            cons: "Inmoviliza el dinero por periodos de 6 meses",
             is_best: true,
             steps: [
-              "Aportes mensuales de $833.000 a cuenta remunerada",
-              "Constituir CDT a 180 días antes de cada semestre",
-              "Pagar la matrícula al vencimiento e incorporar los rendimientos"
+              "Aportes mensuales de $750.000 a cuenta de alto rendimiento",
+              "Constitución de CDT a 180 días previo a cada semestre",
+              "Pago de matrícula al vencimiento sumando los rendimientos"
             ],
-            chart_original: 28500000,
-            chart_optimized: 25000000
+            chart_original: 21200000,
+            chart_optimized: 18000000
           },
           {
-            name: "Ahorro Programado + Cesantías de Ley",
-            impact: "Cero endeudamiento bancario",
-            monthly_cost: "$650.000/mes",
-            horizon: "30 meses",
-            vehicle: "Bolsillo de Ahorro Automático",
-            pros: "Aprovecha recursos laborales ya existentes",
-            cons: "Compromete las cesantías de los próximos 2 años",
+            name: "Ahorro Programado + Cesantías",
+            impact: "Cero deuda bancaria",
+            monthly_cost: "$550.000/mes",
+            horizon: "24 meses",
+            vehicle: "Bolsillo de Ahorro + Fondo de Cesantías",
+            pros: "Aprovecha recursos ya disponibles de cesantías",
+            cons: "Compromete el fondo de cesantías laboral",
             is_best: false,
             steps: [
-              "Retiro de cesantías anuales certificado para estudio",
-              "Aporte complementario mensual en cuenta de ahorro",
-              "Pago directo en ventanilla universitaria"
+              "Retiro parcial de cesantías anuales para estudio",
+              "Completar la cuota con ahorro mensual de $550k",
+              "Pago de contado directo a la institución"
             ],
-            chart_original: 28500000,
-            chart_optimized: 25000000
+            chart_original: 21200000,
+            chart_optimized: 18000000
           },
           {
-            name: "Crédito Educativo Rotativo a Corto Plazo",
-            impact: "Desembolso inmediato",
-            monthly_cost: "$920.000/mes",
-            horizon: "36 meses",
-            vehicle: "Línea de Fomento / Cooperativa",
-            pros: "Permite iniciar de inmediato sin ahorros previos",
-            cons: "Costo financiero por intereses (~1.2% MV)",
+            name: "Crédito Educativo de Fomento Blando",
+            impact: "Inicio inmediato",
+            monthly_cost: "$890.000/mes",
+            horizon: "24 meses",
+            vehicle: "Crédito Educativo Cooperativa",
+            pros: "Permite estudiar ya sin esperar a reunir el dinero",
+            cons: "Interés de fomento del 1.1% mensual",
             is_best: false,
             steps: [
               "Aprobación de crédito rotativo de fomento",
-              "Desembolso directo cada semestre",
-              "Amortización constante con opción de abono a capital"
+              "Pago en 24 cuotas fijas",
+              "Abono extraordinario con primas semestrales"
             ],
-            chart_original: 28500000,
-            chart_optimized: 27800000
+            chart_original: 21200000,
+            chart_optimized: 20400000
           }
         ]
       };
     }
 
     // ==========================================
-    // PANTALLA 2: ESTRATEGIA DETALLADA Y EXPLICACIÓN DEL POR QUÉ
+    // PANTALLA 2: ESTRATEGIA DETALLADA
     // ==========================================
     function finalizeDiagnosis() {
       if (isCallActive) {
@@ -759,7 +764,6 @@ FORMATO OBLIGATORIO JSON:
         document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold";
       }
 
-      // Por defecto seleccionar la recomendada
       selectedOptionIndex = 0;
       if (activeData && activeData.options) {
         const bestIdx = activeData.options.findIndex(o => o.is_best);
@@ -774,23 +778,19 @@ FORMATO OBLIGATORIO JSON:
       if (!activeData || !activeData.options) return;
       const currentOpt = activeData.options[selectedOptionIndex];
 
-      // Actualizar Bloque Superior
       document.getElementById("screen2SelectedTag").innerText = `Ruta Seleccionada: ${String.fromCharCode(65 + selectedOptionIndex)}`;
       document.getElementById("screen2AdviceTitle").innerText = currentOpt.name;
 
-      // Explicación de por qué es la mejor
       const whyText = activeData.why_is_best || currentOpt.pros;
       document.getElementById("screen2WhyBest").innerText = whyText;
 
-      // Métricas clave
       document.getElementById("screen2StatSavings").innerText = currentOpt.impact;
       document.getElementById("screen2StatMonthly").innerText = currentOpt.monthly_cost || "N/A";
-      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "30 meses";
+      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "24 meses";
       document.getElementById("screen2StatVehicle").innerText = currentOpt.vehicle || "Instrumento Financiero";
 
       document.getElementById("nextBtnLabel").innerText = `Confirmar Ruta ${String.fromCharCode(65 + selectedOptionIndex)} y Ver Plan`;
 
-      // Renderizar tarjetas interactivas
       const grid = document.getElementById("screen2OptionsGrid");
       grid.innerHTML = "";
 
@@ -848,7 +848,7 @@ FORMATO OBLIGATORIO JSON:
       selectedOptionIndex = index;
       const opt = activeData.options[selectedOptionIndex];
       renderScreen2();
-      speakAI(`Has seleccionado ${opt.name}. Esta alternativa contempla ${opt.impact}.`);
+      speakAI(`Has seleccionado ${opt.name}.`);
     }
 
     // VOZ EN PANTALLA 2
@@ -910,7 +910,7 @@ FORMATO OBLIGATORIO JSON:
 
       conversationHistory.push({
         role: "user",
-        content: `El usuario comenta esto para ajustar la estrategia: "${text}". Recuerda no empujar deudas, explicar por qué la mejor opción es la mejor y estructurar CDT, ahorro y fomento.`
+        content: `El usuario comenta esto para ajustar la estrategia: "${text}". Reestructura las opciones y actualiza por qué la mejor sigue siéndolo.`
       });
 
       const updated = await callGroqAPI();
@@ -932,8 +932,6 @@ FORMATO OBLIGATORIO JSON:
     // ==========================================
     function renderScreen3() {
       if (!activeData || !activeData.options) return;
-      
-      // TOMA ESTRICTAMENTE LA OPCIÓN SELECCIONADA POR EL USUARIO
       const opt = activeData.options[selectedOptionIndex];
 
       document.getElementById("finalPlanTitle").innerText = `Plan Definitivo: ${opt.name}`;
@@ -961,9 +959,9 @@ FORMATO OBLIGATORIO JSON:
       finalChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Costo con Crédito Tradicional', `Con ${opt.name.substring(0, 22)}...`],
+          labels: ['Costo con Crédito Consumo', `Con ${opt.name.substring(0, 22)}...`],
           datasets: [{
-            data: [opt.chart_original || 28500000, opt.chart_optimized || 25000000],
+            data: [opt.chart_original || 21000000, opt.chart_optimized || 18000000],
             backgroundColor: ['rgba(225, 29, 72, 0.15)', 'rgba(5, 150, 105, 0.2)'],
             borderColor: ['#E11D48', '#059669'],
             borderWidth: 1.5,
@@ -1017,9 +1015,12 @@ FORMATO OBLIGATORIO JSON:
       activeData = null;
       selectedOptionIndex = 0;
       document.getElementById("turnCounter").innerText = "0 turnos";
+      document.getElementById("tagGoal").innerText = "Por definir";
+      document.getElementById("tagCost").innerText = "Pendiente";
+      document.getElementById("tagIncome").innerText = "Pendiente";
       document.getElementById("liveDialogueContainer").innerHTML = `
         <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-          Tu conversación y las respuestas de voz de FinAI irán apareciendo aquí...
+          Tu conversación y las preguntas de diagnóstico de FinAI irán apareciendo aquí...
         </div>
       `;
       document.getElementById("finishChatBtn").disabled = true;
