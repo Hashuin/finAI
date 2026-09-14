@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FINAI — Decision Engine Financiero</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            finDark: '#080C14',
+            finCard: '#0F172A',
+            finBorder: 'rgba(255, 255, 255, 0.08)',
+            finGreen: '#10B981',
+            finCyan: '#06B6D4',
+            finAmber: '#F59E0B',
+            finRose: '#F43F5E'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #06090F; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .glass {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .step-pill-active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10B981;
+      color: #34D399;
+    }
+    .option-card-hover {
+      transition: all 0.2s ease;
+    }
+    .option-card-hover:hover {
+      border-color: rgba(16, 185, 129, 0.5);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col justify-between pb-6">
+
+  <!-- TOP NAV & BREADCRUMB DE 3 PASOS (CUMPLE REQUISITO 01: FLUJO NAVEGABLE) -->
+  <header class="w-full max-w-5xl mx-auto px-4 pt-4 sticky top-0 z-30">
+    <div class="glass rounded-2xl px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 border-finBorder">
+      
+      <!-- Brand -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center font-black text-black text-sm shadow-md shadow-emerald-500/20">
+          ⚡
+        </div>
+        <div>
+          <div class="font-bold tracking-tight text-white flex items-center gap-2 text-sm md:text-base">
+            FINAI <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">Groq Llama-3.3 70B</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Motor de Decisiones Financieras Cotidianas</div>
+        </div>
+      </div>
+
+      <!-- Stepper / Navegador de 3 Pantallas -->
+      <div class="flex items-center gap-1.5 text-xs">
+        <button id="stepNav1" onclick="goToStep(1)" class="step-pill-active px-3 py-1.5 rounded-xl border border-white/10 font-medium transition flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] flex items-center justify-center font-bold">1</span>
+          Diagnóstico
+        </button>
+        <span class="text-slate-600">→</span>
+        <button id="stepNav2" onclick="goToStep(2)" class="px-3 py-1.5 rounded-xl border border-white/5 text-slate-400 font-medium transition flex items-center gap-1.5 hover:text-white">
+          <span class="w-4 h-4 rounded-full bg-white/10 text-[10px] flex items-center justify-center font-bold">2</span>
+          Opciones IA
+        </button>
+        <span class="text-slate-600">→</span>
+        <button id="stepNav3" onclick="goToStep(3)" class="px-3 py-1.5 rounded-xl border border-white/5 text-slate-400 font-medium transition flex items-center gap-1.5 hover:text-white">
+          <span class="w-4 h-4 rounded-full bg-white/10 text-[10px] flex items-center justify-center font-bold">3</span>
+          Plan & Valor
+        </button>
+      </div>
+
+      <!-- Botón Config Key -->
+      <button onclick="toggleConfigModal()" class="p-2 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition">
+        <i data-lucide="settings" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO DINÁMICO (3 PANTALLAS CONECTADAS) -->
+  <main class="w-full max-w-5xl mx-auto px-4 mt-4 flex-1 flex flex-col justify-center">
+
+    <!-- ============================================== -->
+    <!-- PANTALLA 1: EL PROBLEMA & DIAGNÓSTICO EXPRESS -->
+    <!-- ============================================== -->
+    <div id="screen1" class="space-y-4">
+      
+      <!-- Presets de Pitch para rapidez en vivo -->
+      <div class="glass p-3 rounded-2xl flex items-center gap-2 overflow-x-auto text-xs">
+        <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] whitespace-nowrap">⚡ Presets Demo:</span>
+        <button onclick="fillPreset('card_trap')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition whitespace-nowrap">
+          💳 Deuda de Tarjeta Ahogada ($5M)
+        </button>
+        <button onclick="fillPreset('impulse_buy')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition whitespace-nowrap">
+          📱 Comprar iPhone a 24 cuotas
+        </button>
+        <button onclick="fillPreset('ant_leaks')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition whitespace-nowrap">
+          ☕ No sé en qué se me va el sueldo
+        </button>
+      </div>
+
+      <!-- Card Central Formulario Interactivo -->
+      <div class="glass rounded-2xl p-6 border-finBorder">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Paso 1 de 3</span>
+          <h2 class="text-xl md:text-2xl font-bold text-white mt-1">¿Qué decisión o problema financiero tienes hoy?</h2>
+          <p class="text-xs text-slate-400 mt-1">
+            FinAI desglosará las tasas, gastos hormiga, costos ocultos y capacidad real de pago.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Textarea / Input con Voz -->
+          <div class="relative">
+            <textarea 
+              id="userProblem" 
+              rows="3" 
+              placeholder="Ej: Tengo una deuda de $5.000.000 en la tarjeta con interés del 29% y pago $300k de mínimo pero no baja. Gano $3.200.000 al mes y no sé cómo salir de esto..." 
+              class="w-full bg-finDark/90 border border-white/10 focus:border-emerald-500 rounded-xl p-3.5 text-sm text-white placeholder-slate-500 outline-none transition resize-none"
+            ></textarea>
+            
+            <button type="button" id="voiceBtn" onclick="toggleSpeech()" class="absolute bottom-3 right-3 p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition" title="Hablar por micrófono">
+              <i data-lucide="mic" class="w-4 h-4"></i>
+              <span id="recordingPulse" class="hidden absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            </button>
+          </div>
+
+          <!-- Campos rápidos opcionales -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+            <div>
+              <label class="text-[10px] text-slate-400 font-medium block mb-1">Ingreso Mensual Aprox.</label>
+              <input id="inputIncome" type="text" placeholder="$3.200.000" class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white outline-none focus:border-emerald-500 font-mono" />
+            </div>
+            <div>
+              <label class="text-[10px] text-slate-400 font-medium block mb-1">Gastos Fijos Aprox.</label>
+              <input id="inputFixed" type="text" placeholder="$1.800.000" class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white outline-none focus:border-emerald-500 font-mono" />
+            </div>
+            <div class="col-span-2 md:col-span-1">
+              <label class="text-[10px] text-slate-400 font-medium block mb-1">Monto en Juego / Deuda</label>
+              <input id="inputTarget" type="text" placeholder="$5.000.000" class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white outline-none focus:border-emerald-500 font-mono" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón de Ejecutar Análisis IA -->
+        <div class="mt-6 flex justify-end">
+          <button onclick="processAIAnalysis()" id="analyzeBtn" class="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-black font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+            <span>Analizar con FinAI en Groq</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PANTALLA 2: ANÁLISIS COGNITIVO & RUTAS DE SOLUCIÓN -->
+    <!-- ============================================== -->
+    <div id="screen2" class="hidden space-y-4">
+      
+      <!-- Card Diagnóstico de Raíz -->
+      <div class="glass rounded-2xl p-4 border-finBorder">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-400">
+            <i data-lucide="scan" class="w-4 h-4"></i> Diagnóstico de Causa Raíz
+          </div>
+          <span id="screen2RiskBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            ALTO RIESGO
+          </span>
+        </div>
+        <p id="screen2RootCause" class="text-sm text-white font-medium mb-1">
+          Analizando...
+        </p>
+        <p id="screen2ShockStat" class="text-xs text-amber-300 font-mono">
+          Calculando impacto financiero...
+        </p>
+      </div>
+
+      <!-- Rutas Comparadas -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="git-branch" class="w-4 h-4 text-emerald-400"></i>
+            Opciones Estratégicas Generadas
+          </h3>
+          <span class="text-[10px] text-slate-400">Selecciona la mejor opción</span>
+        </div>
+
+        <div id="screen2OptionsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Opciones inyectadas por JS -->
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <div class="flex justify-between items-center pt-2">
+        <button onclick="goToStep(1)" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-slate-300">
+          ← Volver a Diagnóstico
+        </button>
+        <button onclick="goToStep(3)" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
+          <span>Ver Plan Táctico & Valor</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PANTALLA 3: PLAN TÁCTICO & VALOR DEMOSTRABLE -->
+    <!-- (Cumple con "Valor Usuario 35%" y "Valor Negocio 25%") -->
+    <!-- ============================================== -->
+    <div id="screen3" class="hidden space-y-4">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        
+        <!-- Columna Izquierda: Plan de Acción Paso a Paso (7 cols) -->
+        <div class="lg:col-span-7 glass rounded-2xl p-5 border-finBorder flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Paso 3 de 3: Ejecución</span>
+              <span id="selectedOptionBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Opción Seleccionada
+              </span>
+            </div>
+
+            <h3 id="planTitleDisplay" class="text-base md:text-lg font-bold text-white mb-2">
+              Plan Táctico Inmediato
+            </h3>
+            
+            <div id="planStepsContainer" class="space-y-2.5 text-xs text-slate-300 mt-3">
+              <!-- Pasos inyectados por JS -->
+            </div>
+          </div>
+
+          <!-- Micro-simulador interactivo de impacto -->
+          <div class="mt-4 p-3 rounded-xl bg-black/40 border border-white/5">
+            <div class="text-[10px] text-slate-400 uppercase font-mono mb-2">Simulación de Ahorro / Recuperación</div>
+            <div class="h-28 w-full">
+              <canvas id="impactChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Valor Demostrable Usuario & Negocio (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-3">
+          
+          <!-- Valor para el Usuario (35% de la Rúbrica) -->
+          <div class="glass rounded-2xl p-4 border-emerald-500/30 bg-emerald-500/5">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+              <i data-lucide="user-check" class="w-4 h-4"></i> Valor para el Usuario (35%)
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5">
+              <li class="flex items-start gap-1.5">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span id="valUserMoney">Ahorro proyectado de dinero y cero intereses.</span>
+              </li>
+              <li class="flex items-start gap-1.5">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Claridad matemática instantánea: elimina la parálisis por análisis.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Valor para el Negocio / Monetización (25% de la Rúbrica) -->
+          <div class="glass rounded-2xl p-4 border-cyan-500/30 bg-cyan-500/5">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2">
+              <i data-lucide="briefcase" class="w-4 h-4"></i> Valor para el Negocio (25%)
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5">
+              <li class="flex items-start gap-1.5">
+                <span class="text-cyan-400 font-bold">$</span>
+                <span><strong>Modelo Freemium:</strong> Diagnósticos gratuitos, ejecución y alertas avanzadas $4.99/mes.</span>
+              </li>
+              <li class="flex items-start gap-1.5">
+                <span class="text-cyan-400 font-bold">$</span>
+                <span><strong>Marketplace de Compra de Cartera:</strong> Comisión por conectar con bancos con tasas menores.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Botón de Reiniciar -->
+          <button onclick="goToStep(1)" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition">
+            Iniciar otra consulta
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL CONFIG API KEY -->
+  <div id="configModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass w-full max-w-md p-6 rounded-2xl border-white/10 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i data-lucide="key" class="w-4 h-4 text-emerald-400"></i> Configuración Groq API
+        </h3>
+        <button onclick="toggleConfigModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <input 
+        id="apiKeyInput" 
+        type="password" 
+        placeholder="gsk_..." 
+        class="w-full bg-black/50 border border-white/10 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-white font-mono mb-4 outline-none"
+      />
+      <div class="flex justify-end gap-2">
+        <button onclick="toggleConfigModal()" class="px-4 py-2 rounded-xl text-xs bg-white/5 text-slate-300">Cerrar</button>
+        <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500 text-black">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tu clave precargada
+    const DEFAULT_KEY = "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";
+    if (!localStorage.getItem("groq_api_key")) {
+      localStorage.setItem("groq_api_key", DEFAULT_KEY);
+    }
+
+    let activeData = null;
+    let selectedOptionIndex = 0;
+    let impactChart = null;
+
+    lucide.createIcons();
+
+    // Control de Flujo de 3 Pasos (Requisito 01)
+    function goToStep(step) {
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen3").classList.add("hidden");
+
+      document.querySelectorAll("[id^='stepNav']").forEach(btn => {
+        btn.className = "px-3 py-1.5 rounded-xl border border-white/5 text-slate-400 font-medium transition flex items-center gap-1.5 hover:text-white";
+      });
+
+      const currentNav = document.getElementById(`stepNav${step}`);
+      currentNav.className = "step-pill-active px-3 py-1.5 rounded-xl border border-white/10 font-medium transition flex items-center gap-1.5";
+
+      document.getElementById(`screen${step}`).classList.remove("hidden");
+      lucide.createIcons();
+
+      if (step === 3 && activeData) {
+        renderScreen3();
+      }
+    }
+
+    // Presets Demo rápidos
+    function fillPreset(type) {
+      if (type === 'card_trap') {
+        document.getElementById("userProblem").value = "Tengo una deuda de $5.000.000 en la tarjeta con tasa del 29% EA. Pago $280k de pago mínimo cada mes pero la deuda no baja nada y ya no me alcanza para vivir.";
+        document.getElementById("inputIncome").value = "$3.200.000";
+        document.getElementById("inputFixed").value = "$1.900.000";
+        document.getElementById("inputTarget").value = "$5.000.000";
+      } else if (type === 'impulse_buy') {
+        document.getElementById("userProblem").value = "Quiero comprar el nuevo iPhone de $4.800.000 financiado a 24 cuotas. Gano $2.800.000 y mis gastos fijos son $1.700.000. ¿Me ahogaré financieramente?";
+        document.getElementById("inputIncome").value = "$2.800.000";
+        document.getElementById("inputFixed").value = "$1.700.000";
+        document.getElementById("inputTarget").value = "$4.800.000";
+      } else if (type === 'ant_leaks') {
+        document.getElementById("userProblem").value = "Gano $3.500.000 y mis gastos fijos son $1.800.000, pero llego raspando a fin de mes. Pido delivery casi todos los días y salgo los fines de semana. ¿Dónde se va mi dinero?";
+        document.getElementById("inputIncome").value = "$3.500.000";
+        document.getElementById("inputFixed").value = "$1.800.000";
+        document.getElementById("inputTarget").value = "$0";
+      }
+    }
+
+    // Modal
+    function toggleConfigModal() {
+      const modal = document.getElementById("configModal");
+      document.getElementById("apiKeyInput").value = localStorage.getItem("groq_api_key") || "";
+      modal.classList.toggle("hidden");
+    }
+    function saveApiKey() {
+      const k = document.getElementById("apiKeyInput").value.trim();
+      if (k) { localStorage.setItem("groq_api_key", k); toggleConfigModal(); alert("Clave guardada"); }
+    }
+
+    // Voz
+    let recognition = null;
+    let isRecording = false;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRec();
+      recognition.lang = 'es-ES';
+      recognition.onresult = (e) => {
+        document.getElementById("userProblem").value = e.results[0][0].transcript;
+        stopVoice();
+      };
+      recognition.onerror = () => stopVoice();
+      recognition.onend = () => stopVoice();
+    }
+    function toggleSpeech() {
+      if (!recognition) return alert("Usa Chrome o Safari para voz");
+      if (isRecording) { recognition.stop(); stopVoice(); }
+      else { recognition.start(); isRecording = true; document.getElementById("recordingPulse").classList.remove("hidden"); }
+    }
+    function stopVoice() {
+      isRecording = false;
+      document.getElementById("recordingPulse").classList.add("hidden");
+    }
+
+    // PROCESAMIENTO IA CON GROQ (CUMPLE 03: IA CON PROPÓSITO)
+    async function processAIAnalysis() {
+      const problem = document.getElementById("userProblem").value.trim();
+      if (!problem) return alert("Por favor escribe tu duda o problema o selecciona un preset.");
+
+      const income = document.getElementById("inputIncome").value;
+      const fixed = document.getElementById("inputFixed").value;
+      const target = document.getElementById("inputTarget").value;
+
+      const btn = document.getElementById("analyzeBtn");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="animate-spin mr-2">⚙️</span> Procesando en Groq...`;
+
+      const prompt = `Analiza este problema financiero cotidiano:
+Problema/Dilema: "${problem}"
+Datos extras: Ingreso mensual: ${income}, Gastos fijos: ${fixed}, Monto/Deuda en juego: ${target}.
+
+Genera:
+1. Diagnóstico de causa raíz y nivel de riesgo.
+2. 3 Opciones contrastadas (Opción A: Rápida/Agresiva, Opción B: Balanceada Recomendada, Opción C: Conservadora).
+3. Plan táctico de ejecución inmediata.`;
+
+      const apiKey = localStorage.getItem("groq_api_key");
+
+      try {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "llama-3.3-70b-versatile",
+            response_format: { type: "json_object" },
+            temperature: 0.2,
+            messages: [
+              {
+                role: "system",
+                content: `Eres el motor analítico de FINAI. Devuelve SIEMPRE JSON ESTRICTO con este formato:
+{
+  "root_cause": "Explicación directa de la causa raíz",
+  "risk_level": "ALTO" | "MEDIO" | "BAJO",
+  "shock_stat": "Cifra de impacto psicológico (ej: 'Pagarás $2.1M solo en intereses' o 'Gastas $3.6M al año en delivery')",
+  "options": [
+    {
+      "name": "Nombre de la opción",
+      "impact": "Ahorro o impacto estimado",
+      "pros": "Ventaja principal",
+      "cons": "Esfuerzo necesario",
+      "steps": ["Paso 1 conciso", "Paso 2 conciso", "Paso 3 conciso"],
+      "chart_original": 5000000,
+      "chart_optimized": 3200000
+    },
+    {
+      "name": "Nombre opción 2",
+      "impact": "Impacto estimado",
+      "pros": "Ventaja",
+      "cons": "Desventaja",
+      "steps": ["Paso 1", "Paso 2"],
+      "chart_original": 5000000,
+      "chart_optimized": 4100000
+    },
+    {
+      "name": "Nombre opción 3",
+      "impact": "Impacto estimado",
+      "pros": "Ventaja",
+      "cons": "Desventaja",
+      "steps": ["Paso 1", "Paso 2"],
+      "chart_original": 5000000,
+      "chart_optimized": 4800000
+    }
+  ]
+}`
+              },
+              { role: "user", content: prompt }
+            ]
+          })
+        });
+
+        const data = await response.json();
+        activeData = JSON.parse(data.choices[0].message.content);
+        selectedOptionIndex = 0;
+
+        renderScreen2();
+        goToStep(2);
+
+      } catch (err) {
+        console.error(err);
+        alert("Error al conectar con Groq. Verifica tu conexión o clave.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<span>Analizar con FinAI en Groq</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+        lucide.createIcons();
+      }
+    }
+
+    // Renderizado Pantalla 2
+    function renderScreen2() {
+      if (!activeData) return;
+
+      document.getElementById("screen2RootCause").innerText = activeData.root_cause;
+      document.getElementById("screen2ShockStat").innerText = `⚡ ${activeData.shock_stat}`;
+
+      const badge = document.getElementById("screen2RiskBadge");
+      badge.innerText = `RIESGO ${activeData.risk_level}`;
+      badge.className = activeData.risk_level === 'ALTO' 
+        ? "text-[10px] font-mono px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30"
+        : "text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30";
+
+      const grid = document.getElementById("screen2OptionsGrid");
+      grid.innerHTML = "";
+
+      activeData.options.forEach((opt, idx) => {
+        const card = document.createElement("div");
+        const isSelected = idx === selectedOptionIndex;
+
+        card.className = `option-card-hover glass p-4 rounded-2xl border cursor-pointer flex flex-col justify-between ${
+          isSelected ? 'border-emerald-500 bg-emerald-500/10' : 'border-white/10'
+        }`;
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-slate-400 uppercase">Ruta ${String.fromCharCode(65 + idx)}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
+                ${opt.impact}
+              </span>
+            </div>
+            <h4 class="text-sm font-bold text-white mb-2">${opt.name}</h4>
+            <div class="space-y-1 text-xs mb-3">
+              <div class="text-emerald-400 flex items-center gap-1.5">
+                <span>✓</span> <span>${opt.pros}</span>
+              </div>
+              <div class="text-rose-400 flex items-center gap-1.5">
+                <span>✕</span> <span>${opt.cons}</span>
+              </div>
+            </div>
+          </div>
+          <button class="w-full py-2 rounded-xl text-xs font-semibold ${
+            isSelected ? 'bg-emerald-500 text-black' : 'bg-white/5 text-slate-300 hover:bg-white/10'
+          }">
+            ${isSelected ? 'Seleccionada ✓' : 'Elegir esta ruta'}
+          </button>
+        `;
+
+        card.onclick = () => {
+          selectedOptionIndex = idx;
+          renderScreen2();
+        };
+
+        grid.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    // Renderizado Pantalla 3
+    function renderScreen3() {
+      if (!activeData) return;
+      const opt = activeData.options[selectedOptionIndex];
+
+      document.getElementById("planTitleDisplay").innerText = `Plan de Acción: ${opt.name}`;
+      document.getElementById("selectedOptionBadge").innerText = `Ruta ${String.fromCharCode(65 + selectedOptionIndex)} Elegida`;
+      document.getElementById("valUserMoney").innerText = `Rescate financiero estimado: ${opt.impact}`;
+
+      const container = document.getElementById("planStepsContainer");
+      container.innerHTML = "";
+
+      opt.steps.forEach((step, idx) => {
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "p-2.5 rounded-xl bg-black/30 border border-white/5 flex items-start gap-2.5";
+        stepDiv.innerHTML = `
+          <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[10px] shrink-0">
+            ${idx + 1}
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">${step}</p>
+        `;
+        container.appendChild(stepDiv);
+      });
+
+      // Gráfico de impacto comparativo
+      const ctx = document.getElementById('impactChart').getContext('2d');
+      if (impactChart) impactChart.destroy();
+
+      impactChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Costo sin FinAI', `Con Ruta ${String.fromCharCode(65 + selectedOptionIndex)}`],
+          datasets: [{
+            data: [opt.chart_original || 5000000, opt.chart_optimized || 3200000],
+            backgroundColor: ['rgba(244, 63, 94, 0.4)', 'rgba(16, 185, 129, 0.6)'],
+            borderColor: ['#F43F5E', '#10B981'],
+            borderWidth: 1,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#94A3B8', font: { size: 10 } }, grid: { display: false } },
+            y: { ticks: { color: '#64748B', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
