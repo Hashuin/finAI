@@ -45,7 +45,6 @@
       color: #047857;
       font-weight: 600;
     }
-    /* Animación de Ondas de Voz cuando habla o escucha */
     .pulse-ring {
       animation: pulseWave 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
@@ -64,7 +63,6 @@
   <header class="w-full max-w-5xl mx-auto px-4 pt-4 sticky top-0 z-30">
     <div class="card-clean rounded-2xl px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
       
-      <!-- Logo & Estado de Llamada -->
       <div class="flex items-center gap-2.5">
         <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center font-black text-white text-sm shadow-md shadow-emerald-500/20">
           ⚡
@@ -77,7 +75,7 @@
         </div>
       </div>
 
-      <!-- Stepper / Navegador de 3 Pantallas -->
+      <!-- Stepper de 3 Pantallas -->
       <div class="flex items-center gap-1.5 text-xs">
         <button id="stepNav1" onclick="goToStep(1)" class="step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm">
           <span class="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 text-[10px] flex items-center justify-center font-bold">1</span>
@@ -86,34 +84,31 @@
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav2" onclick="goToStep(2)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
           <span class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 text-[10px] flex items-center justify-center font-bold">2</span>
-          Opciones & Acuerdo
+          Opciones & Estrategia
         </button>
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav3" onclick="goToStep(3)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
           <span class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 text-[10px] flex items-center justify-center font-bold">3</span>
-          Plan Final Acordado
+          Plan Acordado
         </button>
       </div>
 
-      <!-- Configuración -->
       <button onclick="toggleConfigModal()" class="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 border border-slate-200 transition" title="Configurar Key">
         <i data-lucide="settings" class="w-4 h-4"></i>
       </button>
     </div>
   </header>
 
-  <!-- CONTENIDO DINÁMICO (3 PANTALLAS CONECTADAS) -->
+  <!-- CONTENIDO DINÁMICO -->
   <main class="w-full max-w-5xl mx-auto px-4 mt-4 flex-1 flex flex-col justify-center">
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 1: LA CHARLA EN VIVO (VOICE-FIRST INTERACTION) -->
+    <!-- PANTALLA 1: LA CHARLA EN VIVO -->
     <!-- ======================================================== -->
     <div id="screen1" class="grid grid-cols-1 lg:grid-cols-12 gap-4">
       
-      <!-- Columna Izquierda: La interfaz de llamada por voz (7 cols) -->
-      <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[460px] text-center relative overflow-hidden">
-        
-        <!-- Estado superior -->
+      <!-- Orbe / Botón Central de Voz -->
+      <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[470px] text-center relative overflow-hidden">
         <div class="w-full flex items-center justify-between">
           <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Diagnóstico Dinámico</span>
           <span id="speakerStatus" class="text-xs text-slate-500 font-medium flex items-center gap-1">
@@ -121,7 +116,6 @@
           </span>
         </div>
 
-        <!-- Orbe / Botón Central de Conversación por Voz -->
         <div class="my-auto flex flex-col items-center">
           <div class="relative flex items-center justify-center">
             <div id="voiceWave" class="hidden absolute w-36 h-36 rounded-full bg-emerald-100 pulse-ring"></div>
@@ -136,48 +130,46 @@
           </div>
 
           <h3 id="callHeading" class="text-base font-bold text-slate-800 mt-5 mb-1">
-            Toca el micrófono para iniciar la charla
+            Toca el micrófono para hablar con FinAI
           </h3>
           <p id="callSubheading" class="text-xs text-slate-500 max-w-sm">
-            Cuéntale a FinAI qué estás planeando o qué te preocupa financieramente. Te escuchará y te responderá en voz alta.
+            Cuéntale tu caso (ej: semestres de universidad, deudas, compras). Al formular la estrategia, avanzará automáticamente al Paso 2.
           </p>
         </div>
 
-        <!-- Presets para hablar rápido si no tienes ganas de improvisar -->
+        <!-- Presets rápidos -->
         <div class="w-full pt-4 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Odiálogo rápido:</span>
-          <button onclick="startVoiceWithPreset('Quiero comprarme el nuevo teléfono de cinco millones a doce cuotas pero gano dos millones ochocientos y no sé si me ahorcaré')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            📱 Compra a cuotas
+          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Casos Demo:</span>
+          <button onclick="startVoiceWithPreset('Necesito pagar 5 semestres de universidad de 5 millones cada uno. Gano 3 millones y quiero saber cómo distribuirlo sin endeudarme mal')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            🎓 5 Semestres ($25M)
           </button>
-          <button onclick="startVoiceWithPreset('Tengo una deuda de cuatro millones en la tarjeta que no me deja dormir, pago el mínimo pero no baja')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            💳 Deuda de tarjeta
+          <button onclick="startVoiceWithPreset('Tengo una deuda de 5 millones en la tarjeta al 29% y el pago mínimo no baja nada')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            💳 Deuda Tarjeta
           </button>
         </div>
       </div>
 
-      <!-- Columna Derecha: Bitácora de la Conversación y Hechos Detectados (5 cols) -->
-      <div class="lg:col-span-5 card-clean rounded-2xl p-5 flex flex-col justify-between h-[460px]">
+      <!-- Bitácora de Conversación -->
+      <div class="lg:col-span-5 card-clean rounded-2xl p-5 flex flex-col justify-between h-[470px]">
         <div>
           <div class="flex items-center justify-between mb-3">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
               <i data-lucide="brain-circuit" class="w-4 h-4 text-emerald-600"></i>
-              Lo que FinAI va entendiendo
+              Conversación en Vivo
             </h4>
             <span id="turnCounter" class="text-[10px] font-mono text-slate-400">0 turnos</span>
           </div>
 
-          <!-- Historial de mensajes hablados -->
-          <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[290px] pr-1 text-xs">
+          <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[320px] pr-1 text-xs">
             <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-              Tu conversación transcrita y las respuestas de FinAI irán apareciendo aquí a medida que hablen...
+              Tu conversación y las respuestas de voz de FinAI irán apareciendo aquí...
             </div>
           </div>
         </div>
 
-        <!-- Botón para avanzar cuando ya se tenga la idea clara -->
-        <div class="pt-3 border-t border-slate-100">
+        <div class="pt-2 border-t border-slate-100 flex justify-end">
           <button onclick="finalizeDiagnosis()" id="finishChatBtn" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition disabled:opacity-50" disabled>
-            <span>Ver Opciones y Co-construir Solución</span>
+            <span>Ver Opciones y Estrategia</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -186,11 +178,11 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 2: Opciones de Solución & Negociación por Voz -->
+    <!-- PANTALLA 2: ESTRATEGIAS & REESTRUCTURACIÓN POR VOZ -->
     <!-- ======================================================== -->
     <div id="screen2" class="hidden space-y-4">
       
-      <!-- Card: LA MEJOR SOLUCIÓN RECOMENDADA POR FINAI -->
+      <!-- Card: LA MEJOR SOLUCIÓN RECOMENDADA -->
       <div class="card-clean rounded-2xl p-5 md:p-6 border-emerald-300 bg-gradient-to-br from-white via-emerald-50/20 to-emerald-50/50 shadow-md">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800">
@@ -203,8 +195,8 @@
         <h3 id="screen2BestTitle" class="text-base md:text-lg font-bold text-slate-900 mb-1">
           Ruta Óptima Seleccionada
         </h3>
-        <p id="screen2BestReason" class="text-xs text-slate-700 leading-relaxed mb-3">
-          Por qué esta ruta equilibra tu meta con tu liquidez mensual.
+        <p id="screen2BestReason" class="text-xs text-slate-700 leading-relaxed mb-3 font-medium">
+          Cargando análisis de horizonte temporal y costo real...
         </p>
         <div class="p-3 bg-white rounded-xl border border-emerald-200 flex items-center justify-between">
           <span class="text-xs text-slate-600 font-semibold">Rescate / Ahorro Proyectado:</span>
@@ -212,39 +204,39 @@
         </div>
       </div>
 
-      <!-- Comparación de las 3 alternativas -->
+      <!-- Comparación de 3 rutas -->
       <div>
         <div class="flex items-center justify-between mb-2 px-1">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600">Otras alternativas consideradas:</h4>
-          <span class="text-[11px] text-slate-400">Toca para elegir otra o habla abajo para cambiarla</span>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600">Otras alternativas comparadas:</h4>
+          <span class="text-[11px] text-slate-400">Toca para elegir otra o habla abajo para reestructurar</span>
         </div>
         <div id="screen2OptionsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
       </div>
 
-      <!-- BARRA DE VOZ PARA DEBATIR / REESTRUCTURAR LA SOLUCIÓN -->
+      <!-- BARRA DE VOZ ACTIVA EN PANTALLA 2 (CORREGIDA) -->
       <div class="card-clean rounded-2xl p-4 bg-slate-50/70 border-emerald-200">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-            <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i>
-            ¿No te convence del todo o tienes una idea mejor? Sigue hablando con FinAI:
+            <i data-lucide="mic" class="w-4 h-4 text-emerald-600"></i>
+            ¿Quieres debatir o ajustar algo? Háblale a FinAI:
           </span>
-          <span class="text-[10px] font-mono text-slate-400">Escucha activa</span>
+          <span id="screen2VoiceStatus" class="text-[10px] font-mono text-slate-400">Micrófono disponible</span>
         </div>
 
         <div class="flex items-center gap-2">
           <button 
             type="button" 
-            onclick="toggleSpeech('negotiateInput')" 
-            id="negotiateMicBtn" 
-            class="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex items-center justify-center shrink-0"
-            title="Hablar para ajustar la solución"
+            onclick="toggleScreen2Voice()" 
+            id="screen2MicBtn" 
+            class="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex items-center justify-center shrink-0 transition"
+            title="Toca para hablar y ajustar la estrategia"
           >
-            <i data-lucide="mic" class="w-4 h-4"></i>
+            <i id="screen2MicIcon" data-lucide="mic" class="w-4 h-4"></i>
           </button>
           <input 
             id="negotiateInput"
             type="text" 
-            placeholder="Dile por voz o escribe: '¿Y si en vez de eso vendo mi moto y pago todo de contado?'" 
+            placeholder="Dile por voz o escribe: '¿Y si en vez de eso pago el semestre con mis cesantías?'" 
             class="flex-1 bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 outline-none focus:border-emerald-500"
             onkeydown="if(event.key==='Enter') submitNegotiation()"
           />
@@ -256,11 +248,12 @@
 
       <!-- Navegación -->
       <div class="flex justify-between items-center pt-2">
-        <button onclick="goToStep(1)" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700 transition">
-          ← Volver a la Charla
+        <button onclick="backToConversation()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700 transition flex items-center gap-1.5">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Volver a la Charla (Paso 1)</span>
         </button>
         <button onclick="goToStep(3)" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition">
-          <span>Aceptar y Ver Plan de Acción Final</span>
+          <span>Aceptar y Ver Plan Final</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
@@ -268,19 +261,18 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 3: PLAN FINAL ACORDADO & VALOR DEMOSTRABLE -->
+    <!-- PANTALLA 3: PLAN FINAL ACORDADO -->
     <!-- ======================================================== -->
     <div id="screen3" class="hidden space-y-4">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
         
-        <!-- Columna Izquierda: Plan Táctico Acordado (7 cols) -->
         <div class="lg:col-span-7 card-clean rounded-2xl p-5 md:p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider font-mono">Paso 3: Veredicto Acordado</span>
+              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider font-mono">Paso 3: Plan Acordado</span>
               <span id="finalAgreementBadge" class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                Solución Validada
+                Estrategia Validada
               </span>
             </div>
 
@@ -291,621 +283,6 @@
             <div id="finalStepsContainer" class="space-y-2.5 text-xs text-slate-600 mt-3"></div>
           </div>
 
-          <!-- Micro-simulador de ahorro -->
           <div class="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
             <div class="text-[10px] text-slate-500 uppercase font-mono font-semibold mb-2">Impacto en tu Bolsillo (Simulación Visual)</div>
             <div class="h-28 w-full">
-              <canvas id="finalImpactChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Criterios de Evaluación Hackathon (5 cols) -->
-        <div class="lg:col-span-5 flex flex-col gap-3">
-          
-          <!-- Valor para el Usuario (35% Rúbrica) -->
-          <div class="card-clean rounded-2xl p-4 md:p-5 border-emerald-200 bg-emerald-50/40">
-            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2">
-              <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i> Valor para el Usuario (35%)
-            </div>
-            <ul class="text-xs text-slate-700 space-y-1.5">
-              <li class="flex items-start gap-1.5">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span id="valUserImpact">Solución a la medida sin fricción ni formularios.</span>
-              </li>
-              <li class="flex items-start gap-1.5">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Co-creación: el usuario debate la estrategia hasta sentirse 100% cómodo.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Valor para el Negocio (25% Rúbrica) -->
-          <div class="card-clean rounded-2xl p-4 md:p-5 border-sky-200 bg-sky-50/40">
-            <div class="flex items-center gap-1.5 text-xs font-bold text-sky-800 uppercase tracking-wider mb-2">
-              <i data-lucide="briefcase" class="w-4 h-4 text-sky-600"></i> Valor para el Negocio (25%)
-            </div>
-            <ul class="text-xs text-slate-700 space-y-1.5">
-              <li class="flex items-start gap-1.5">
-                <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Monetización por Éxito:</strong> Comisión al activar la compra de cartera o crédito con fintech aliada.</span>
-              </li>
-              <li class="flex items-start gap-1.5">
-                <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Conversión 4x Superior:</strong> Las interfaces de voz retienen más que los chats de texto tradicionales.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Botón de Reinicio -->
-          <button onclick="resetConversation()" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 border border-slate-200 transition">
-            Iniciar una nueva charla
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- MODAL CONFIG API KEY -->
-  <div id="configModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="card-clean w-full max-w-md p-6 rounded-2xl shadow-2xl">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-          <i data-lucide="key" class="w-4 h-4 text-emerald-600"></i> Configuración Groq API
-        </h3>
-        <button onclick="toggleConfigModal()" class="text-slate-400 hover:text-slate-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-      <p class="text-xs text-slate-500 mb-4">
-        Ingresa tu API Key de Groq sin espacios:
-      </p>
-      <input 
-        id="apiKeyInput" 
-        type="password" 
-        placeholder="gsk_..." 
-        class="w-full bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white rounded-xl px-3.5 py-2.5 text-sm text-slate-800 font-mono mb-4 outline-none transition"
-      />
-      <div class="flex justify-end gap-2">
-        <button onclick="toggleConfigModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Cerrar</button>
-        <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm">Guardar</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    let activeData = null;
-    let selectedOptionIndex = 0;
-    let finalChart = null;
-    let isCallActive = false;
-    let turnCount = 0;
-
-    // Memoria conversacional para la charla en bucle
-    let conversationHistory = [
-      {
-        role: "system",
-        content: `Eres FINAI, un copiloto financiero empático, experto y conversacional. Hablas directamente por voz con el usuario.
-
-TU COMPORTAMIENTO:
-1. Habla como un asesor cercano y directo en español.
-2. Si el usuario te plantea una duda inicial, hazle 1 o 2 preguntas de seguimiento precisas (ej: sus ingresos aproximados, deudas o si tiene ahorros).
-3. Cuando ya tengas suficiente contexto o el usuario pida la solución, formula la mejor recomendación y estructúrala.
-
-DEBES RESPONDER SIEMPRE EN FORMATO JSON ESTRICTO:
-{
-  "voice_reply": "Mensaje conversacional de 1 a 3 oraciones breves para ser hablado con voz natural por el sintetizador.",
-  "is_ready_for_solutions": true/false (true cuando ya hay datos para estructurar alternativas completas),
-  "best_recommendation": {
-    "title": "Nombre claro de la mejor opción",
-    "reason": "Explicación breve de por qué es la ganadora para su caso",
-    "impact": "Ahorro o beneficio clave (ej: Ahorro de $1.200.000)"
-  },
-  "options": [
-    {
-      "name": "Ruta A: Nombre de la opción óptima",
-      "impact": "Impacto monetario",
-      "pros": "Punto fuerte",
-      "cons": "Sacrificio",
-      "is_best": true,
-      "steps": ["Paso 1", "Paso 2", "Paso 3"],
-      "chart_original": 5000000,
-      "chart_optimized": 3200000
-    },
-    {
-      "name": "Ruta B: Alternativa conservadora",
-      "impact": "Impacto monetario",
-      "pros": "Punto fuerte",
-      "cons": "Sacrificio",
-      "is_best": false,
-      "steps": ["Paso 1", "Paso 2"],
-      "chart_original": 5000000,
-      "chart_optimized": 4200000
-    },
-    {
-      "name": "Ruta C: Opción rápida/agresiva",
-      "impact": "Impacto monetario",
-      "pros": "Punto fuerte",
-      "cons": "Sacrificio",
-      "is_best": false,
-      "steps": ["Paso 1", "Paso 2"],
-      "chart_original": 5000000,
-      "chart_optimized": 4700000
-    }
-  ]
-}`
-      }
-    ];
-
-    lucide.createIcons();
-
-    // ==========================================
-    // SÍNTESIS DE VOZ (TEXT-TO-SPEECH)
-    // ==========================================
-    function speakAI(text, callbackOnEnd) {
-      if (!('speechSynthesis' in window)) {
-        if (callbackOnEnd) callbackOnEnd();
-        return;
-      }
-      window.speechSynthesis.cancel();
-
-      const clean = text.replace(/[*_#`~$]/g, '');
-      const utterance = new SpeechSynthesisUtterance(clean);
-      utterance.lang = 'es-LA';
-      utterance.rate = 1.05;
-
-      const voices = window.speechSynthesis.getVoices();
-      const spanishVoice = voices.find(v => v.lang.startsWith('es'));
-      if (spanishVoice) utterance.voice = spanishVoice;
-
-      document.getElementById("speakerStatus").innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> FinAI hablando...`;
-
-      utterance.onend = () => {
-        document.getElementById("speakerStatus").innerHTML = `<i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i> Audio Activo`;
-        lucide.createIcons();
-        if (callbackOnEnd) callbackOnEnd();
-      };
-
-      utterance.onerror = () => {
-        if (callbackOnEnd) callbackOnEnd();
-      };
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    // ==========================================
-    // RECONOCIMIENTO DE VOZ CONTINUO (STT)
-    // ==========================================
-    let recognition = null;
-    let isListening = false;
-    let autoRestartSpeech = false;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRec();
-      recognition.lang = 'es-ES';
-      recognition.continuous = false; // Turnos naturales
-      recognition.interimResults = false;
-
-      recognition.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
-        handleUserSpokenTurn(transcript);
-      };
-
-      recognition.onerror = () => {
-        stopListeningUI();
-      };
-
-      recognition.onend = () => {
-        stopListeningUI();
-      };
-    }
-
-    function startListening() {
-      if (!recognition) return alert("Usa Chrome o Edge para la interacción por voz.");
-      try {
-        recognition.start();
-        isListening = true;
-        document.getElementById("voiceWave").classList.remove("hidden");
-        document.getElementById("callBtnText").innerText = "Escuchando";
-        document.getElementById("callHeading").innerText = "Te estoy escuchando...";
-        document.getElementById("callSubheading").innerText = "Habla con tranquilidad, FinAI te responderá al terminar la frase.";
-      } catch(e) {
-        console.warn(e);
-      }
-    }
-
-    function stopListeningUI() {
-      isListening = false;
-      document.getElementById("voiceWave").classList.add("hidden");
-      document.getElementById("callBtnText").innerText = "Hablar";
-    }
-
-    // ==========================================
-    // CICLO DE LA LLAMADA / CHARLA
-    // ==========================================
-    function toggleLiveCall() {
-      if (isCallActive) {
-        // Pausar llamada
-        isCallActive = false;
-        window.speechSynthesis.cancel();
-        if (recognition) recognition.stop();
-        document.getElementById("callBadge").innerText = "En Pausa";
-        document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono";
-        document.getElementById("callHeading").innerText = "Llamada pausada";
-        document.getElementById("callSubheading").innerText = "Toca el botón cuando quieras reanudar la charla.";
-      } else {
-        // Iniciar llamada activa
-        isCallActive = true;
-        document.getElementById("callBadge").innerText = "En Llamada Activa";
-        document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold animate-pulse";
-        
-        if (turnCount === 0) {
-          const bienvenida = "Hola, soy FinAI. Cuéntame qué decisión o problema financiero tienes en mente y lo resolvemos juntos.";
-          appendDialogue("ai", bienvenida);
-          speakAI(bienvenida, () => {
-            if (isCallActive) startListening();
-          });
-        } else {
-          startListening();
-        }
-      }
-    }
-
-    // Procesa lo que el usuario dijo por el micrófono
-    async function handleUserSpokenTurn(userText) {
-      if (!userText.trim()) return;
-      turnCount++;
-      document.getElementById("turnCounter").innerText = `${turnCount} turnos`;
-      appendDialogue("user", userText);
-
-      // Enviar a Groq
-      conversationHistory.push({ role: "user", content: userText });
-      document.getElementById("callHeading").innerText = "FinAI analizando...";
-      document.getElementById("callSubheading").innerText = "Calculando la mejor estrategia financiera en Groq...";
-
-      const aiResponse = await callGroqAPI();
-
-      if (aiResponse) {
-        activeData = aiResponse;
-        appendDialogue("ai", aiResponse.voice_reply);
-
-        // Habilitar botón de continuar si ya hay datos suficientes
-        document.getElementById("finishChatBtn").disabled = false;
-        document.getElementById("finishChatBtn").classList.add("bg-emerald-600", "hover:bg-emerald-700");
-
-        // Hablar respuesta de la IA y volver a abrir micrófono si la llamada sigue activa
-        speakAI(aiResponse.voice_reply, () => {
-          if (isCallActive) {
-            // Breve pausa y vuelve a escuchar para seguir la charla fluida
-            setTimeout(() => {
-              if (isCallActive) startListening();
-            }, 500);
-          }
-        });
-      }
-    }
-
-    // Iniciar con preset rápido
-    function startVoiceWithPreset(text) {
-      if (!isCallActive) toggleLiveCall();
-      handleUserSpokenTurn(text);
-    }
-
-    // Agregar mensajes a la bitácora visual
-    function appendDialogue(sender, text) {
-      const container = document.getElementById("liveDialogueContainer");
-      if (turnCount === 1 && sender === "user") {
-        container.innerHTML = ""; // Limpiar placeholder inicial
-      }
-
-      const div = document.createElement("div");
-      div.className = sender === "user" 
-        ? "p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-slate-800 ml-4 text-right font-medium"
-        : "p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 mr-4 text-left leading-relaxed";
-      
-      div.innerHTML = `
-        <span class="text-[9px] block uppercase font-mono font-bold ${sender === 'user' ? 'text-emerald-700' : 'text-slate-400'}">
-          ${sender === 'user' ? 'Tú' : 'FinAI'}
-        </span>
-        ${text}
-      `;
-      container.appendChild(div);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    // ==========================================
-    // LLAMADA A GROQ (CON RESPALDO SEGURO)
-    // ==========================================
-    async function callGroqAPI() {
-      const rawKey = (localStorage.getItem("groq_api_key") || "").trim();
-      const models = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "llama-3.3-70b-versatile"];
-
-      if (rawKey.startsWith("gsk_")) {
-        for (const model of models) {
-          try {
-            const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${rawKey}`
-              },
-              body: JSON.stringify({
-                model: model,
-                response_format: { type: "json_object" },
-                temperature: 0.2,
-                messages: conversationHistory
-              })
-            });
-
-            if (resp.ok) {
-              const data = await resp.json();
-              const content = data.choices[0].message.content;
-              conversationHistory.push({ role: "assistant", content: content });
-              return JSON.parse(content);
-            }
-          } catch(e) {
-            console.warn("Error con modelo:", model, e);
-          }
-        }
-      }
-
-      // Fallback heurístico inteligente
-      return {
-        voice_reply: "Te entiendo perfectamente. Si asumimos esa cuota a doce meses, terminarás pagando más de un millón extra solo en intereses. Mi recomendación es optar por la compra de cartera o diferir a una sola cuota para no asfixiar tu liquidez. ¿Quieres que veamos el plan?",
-        is_ready_for_solutions: true,
-        best_recommendation: {
-          title: "Compra de Cartera con Banco Aliado al 14%",
-          reason: "Reduce la tasa a la mitad, bajando tu cuota mensual sin tener que privarte de tus gastos esenciales.",
-          impact: "Ahorras ~$1.450.000 en intereses directos"
-        },
-        options: [
-          {
-            name: "Ruta A: Compra de Cartera (Recomendada)",
-            impact: "Ahorro de $1.450.000",
-            pros: "Tasa preferencial y cuota más baja",
-            cons: "Trámite de 48 horas con entidad aliada",
-            is_best: true,
-            steps: [
-              "Solicitar compra de cartera con banco aliado al 14.5% EA",
-              "Congelar la tarjeta origen para no incurrir en nueva deuda",
-              "Abonar la diferencia de cuota directamente al capital"
-            ],
-            chart_original: 5000000,
-            chart_optimized: 3550000
-          },
-          {
-            name: "Ruta B: Bola de Nieve + Ajuste Temporal",
-            impact: "Deuda saldada en 8 meses",
-            pros: "Sin nuevos trámites bancarios",
-            cons: "Recortar 20% en salidas durante 3 meses",
-            is_best: false,
-            steps: [
-              "Identificar $350k de gastos prescindibles",
-              "Abonar todo el excedente como pago a capital",
-              "Liquidar el saldo en menos de un año"
-            ],
-            chart_original: 5000000,
-            chart_optimized: 4100000
-          },
-          {
-            name: "Ruta C: Reestructuración y Tasa Fija",
-            impact: "Congela mora",
-            pros: "Evita reportes negativos",
-            cons: "Bloqueo temporal de cupo",
-            is_best: false,
-            steps: [
-              "Solicitar tasa fija en área de fidelización",
-              "Pactar cuota cómoda a 12 meses",
-              "Automatizar débito para evitar recargos"
-            ],
-            chart_original: 5000000,
-            chart_optimized: 4600000
-          }
-        ]
-      };
-    }
-
-    // Pasar a Pantalla 2 al finalizar diagnóstico
-    function finalizeDiagnosis() {
-      if (isCallActive) toggleLiveCall(); // Pausar llamada activa
-      renderScreen2();
-      goToStep(2);
-      speakAI(`Hemos analizado tu situación. La mejor alternativa que acordamos es ${activeData.best_recommendation.title}. Puedes confirmarla o decirme si quieres modificar algún punto.`);
-    }
-
-    // ==========================================
-    // PANTALLA 2: AJUSTE Y NEGOCIACIÓN CON FINAI
-    // ==========================================
-    function renderScreen2() {
-      if (!activeData) return;
-
-      if (activeData.best_recommendation) {
-        document.getElementById("screen2BestTitle").innerText = activeData.best_recommendation.title;
-        document.getElementById("screen2BestReason").innerText = activeData.best_recommendation.reason;
-        document.getElementById("screen2BestImpact").innerText = activeData.best_recommendation.impact;
-      }
-
-      const grid = document.getElementById("screen2OptionsGrid");
-      grid.innerHTML = "";
-
-      (activeData.options || []).forEach((opt, idx) => {
-        const card = document.createElement("div");
-        const isSelected = idx === selectedOptionIndex;
-
-        card.className = `card-clean p-4 rounded-2xl cursor-pointer flex flex-col justify-between transition ${
-          isSelected ? 'border-emerald-500 ring-2 ring-emerald-100 bg-emerald-50/20' : 'border-slate-200 hover:border-emerald-300'
-        }`;
-
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase">Ruta ${String.fromCharCode(65 + idx)}</span>
-              ${opt.is_best ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">★ LA MEJOR</span>' : ''}
-              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                ${opt.impact}
-              </span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-900 mb-2">${opt.name}</h4>
-            <div class="space-y-1 text-xs mb-3">
-              <div class="text-emerald-700 flex items-start gap-1 font-medium">
-                <span class="font-bold">✓</span> <span class="leading-tight">${opt.pros}</span>
-              </div>
-              <div class="text-rose-600 flex items-start gap-1 font-medium">
-                <span class="font-bold">✕</span> <span class="leading-tight">${opt.cons}</span>
-              </div>
-            </div>
-          </div>
-          <button class="w-full py-2 rounded-xl text-xs font-bold transition ${
-            isSelected ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }">
-            ${isSelected ? 'Seleccionada ✓' : 'Elegir esta ruta'}
-          </button>
-        `;
-
-        card.onclick = () => {
-          selectedOptionIndex = idx;
-          renderScreen2();
-          speakAI(`Has seleccionado ${opt.name}.`);
-        };
-
-        grid.appendChild(card);
-      });
-      lucide.createIcons();
-    }
-
-    // Permite al usuario debatir o cambiar la solución antes del paso 3
-    async function submitNegotiation() {
-      const input = document.getElementById("negotiateInput");
-      const text = input.value.trim();
-      if (!text) return;
-
-      input.value = "";
-      speakAI("Ajustando la solución según tu nuevo comentario...");
-
-      conversationHistory.push({
-        role: "user",
-        content: `El usuario quiere debatir o modificar la solución con esto: "${text}". Reestructura las opciones y actualiza la mejor recomendación.`
-      });
-
-      const updated = await callGroqAPI();
-      if (updated) {
-        activeData = updated;
-        renderScreen2();
-        speakAI(updated.voice_reply);
-      }
-    }
-
-    // ==========================================
-    // PANTALLA 3: PLAN DEFINITIVO
-    // ==========================================
-    function renderScreen3() {
-      if (!activeData || !activeData.options) return;
-      const opt = activeData.options[selectedOptionIndex];
-
-      document.getElementById("finalPlanTitle").innerText = `Plan de Acción Acordado: ${opt.name}`;
-      document.getElementById("valUserImpact").innerText = `Ahorro y rescate acordado: ${opt.impact}`;
-
-      const container = document.getElementById("finalStepsContainer");
-      container.innerHTML = "";
-
-      (opt.steps || []).forEach((step, idx) => {
-        const stepDiv = document.createElement("div");
-        stepDiv.className = "p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3";
-        stepDiv.innerHTML = `
-          <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
-            ${idx + 1}
-          </div>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium">${step}</p>
-        `;
-        container.appendChild(stepDiv);
-      });
-
-      // Gráfico de impacto acordado
-      const ctx = document.getElementById('finalImpactChart').getContext('2d');
-      if (finalChart) finalChart.destroy();
-
-      finalChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Costo sin FinAI', `Con tu Plan Acordado`],
-          datasets: [{
-            data: [opt.chart_original || 5000000, opt.chart_optimized || 3550000],
-            backgroundColor: ['rgba(225, 29, 72, 0.15)', 'rgba(5, 150, 105, 0.2)'],
-            borderColor: ['#E11D48', '#059669'],
-            borderWidth: 1.5,
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: { ticks: { color: '#64748B', font: { size: 10, weight: 'bold' } }, grid: { display: false } },
-            y: { ticks: { color: '#94A3B8', font: { size: 9 } }, grid: { color: '#F1F5F9' } }
-          }
-        }
-      });
-
-      speakAI(`Excelente. Hemos consolidado tu plan definitivo con ${opt.name}. Aquí tienes tu hoja de ruta paso a paso.`);
-    }
-
-    // Navegación de 3 pantallas
-    function goToStep(step) {
-      document.getElementById("screen1").classList.add("hidden");
-      document.getElementById("screen2").classList.add("hidden");
-      document.getElementById("screen3").classList.add("hidden");
-
-      document.querySelectorAll("[id^='stepNav']").forEach(btn => {
-        btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100";
-      });
-
-      const currentNav = document.getElementById(`stepNav${step}`);
-      if (currentNav) {
-        currentNav.className = "step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm";
-      }
-
-      document.getElementById(`screen${step}`).classList.remove("hidden");
-      lucide.createIcons();
-
-      if (step === 3 && activeData) {
-        renderScreen3();
-      }
-    }
-
-    function resetConversation() {
-      window.speechSynthesis.cancel();
-      isCallActive = false;
-      turnCount = 0;
-      activeData = null;
-      document.getElementById("turnCounter").innerText = "0 turnos";
-      document.getElementById("liveDialogueContainer").innerHTML = `
-        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-          Tu conversación transcrita y las respuestas de FinAI irán apareciendo aquí a medida que hablen...
-        </div>
-      `;
-      document.getElementById("finishChatBtn").disabled = true;
-      document.getElementById("finishChatBtn").className = "w-full py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition disabled:opacity-50";
-      goToStep(1);
-    }
-
-    function toggleConfigModal() {
-      const modal = document.getElementById("configModal");
-      document.getElementById("apiKeyInput").value = (localStorage.getItem("groq_api_key") || "").trim();
-      modal.classList.toggle("hidden");
-    }
-
-    function saveApiKey() {
-      const k = document.getElementById("apiKeyInput").value.trim();
-      if (k) {
-        localStorage.setItem("groq_api_key", k);
-        toggleConfigModal();
-        alert("API Key actualizada");
-      }
-    }
-  </script>
-</body>
-</html>
