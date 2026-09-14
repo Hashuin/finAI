@@ -76,11 +76,11 @@
           <div class="font-bold tracking-tight text-slate-900 flex items-center gap-2 text-sm md:text-base">
             FINAI LIVE <span id="callBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono">En Espera</span>
           </div>
-          <div class="text-[10px] text-slate-500">Diagnóstico Guiado & Asesoría Pro-Usuario</div>
+          <div class="text-[10px] text-slate-500">Asesoría Inteligente con Entidades & CDT Aliados</div>
         </div>
       </div>
 
-      <!-- Stepper 3 Pasos -->
+      <!-- Navegador de 3 Pantallas -->
       <div class="flex items-center gap-1.5 text-xs">
         <button id="stepNav1" onclick="goToStep(1)" class="step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm">
           <span class="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 text-[10px] flex items-center justify-center font-bold">1</span>
@@ -89,7 +89,7 @@
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav2" onclick="goToStep(2)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
           <span class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 text-[10px] flex items-center justify-center font-bold">2</span>
-          La Mejor Solución & Por Qué
+          Estrategias & Entidades
         </button>
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav3" onclick="goToStep(3)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
@@ -108,13 +108,13 @@
   <main class="w-full max-w-5xl mx-auto px-4 mt-4 flex-1 flex flex-col justify-center">
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 1: LA CHARLA & DIAGNÓSTICO GUIADO -->
+    <!-- PANTALLA 1: LA CHARLA EN VIVO -->
     <!-- ======================================================== -->
     <div id="screen1" class="grid grid-cols-1 lg:grid-cols-12 gap-4">
       
       <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[490px] text-center relative overflow-hidden">
         <div class="w-full flex items-center justify-between">
-          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Descubrimiento Financiero</span>
+          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Diagnóstico Sin Sesgos</span>
           <span id="speakerStatus" class="text-xs text-slate-500 font-medium flex items-center gap-1">
             <i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i> Audio Activo
           </span>
@@ -137,7 +137,7 @@
             Toca el micrófono para hablar con FinAI
           </h3>
           <p id="callSubheading" class="text-xs text-slate-500 max-w-sm">
-            Cuéntale qué quieres lograr. Si faltan datos (costo, ingresos o ahorros), FinAI te preguntará antes de calcular.
+            Cuéntale qué quieres lograr. FinAI preguntará los números exactos antes de estructurar las alternativas con bancos y CDTs.
           </p>
         </div>
 
@@ -149,17 +149,16 @@
         </div>
 
         <div class="w-full pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Probar Casos:</span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Casos Rápidos:</span>
           <button onclick="startVoiceWithPreset('Quiero hacer un posgrado o certificado pero no tengo dinero')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            🎓 Caso: Quiero hacer un posgrado (Sin datos)
+            🎓 Caso: Posgrado sin datos (Prueba el freno)
           </button>
-          <button onclick="startVoiceWithPreset('Quiero hacer un posgrado que cuesta 18 millones, gano 4 millones y tengo 3 millones ahorrados')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            📚 Caso Completo ($18M)
+          <button onclick="startVoiceWithPreset('Necesito pagar 5 semestres de universidad de 5 millones cada uno. Gano 3.5 millones y quiero saber qué banco o CDT me sirve sin endeudarme')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            📚 5 Semestres ($25M + Bancos)
           </button>
         </div>
       </div>
 
-      <!-- Bitácora de Conversación -->
       <div class="lg:col-span-5 card-clean rounded-2xl p-5 flex flex-col justify-between h-[490px]">
         <div>
           <div class="flex items-center justify-between mb-3">
@@ -172,14 +171,14 @@
 
           <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[340px] pr-1 text-xs">
             <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-              Tu conversación y las preguntas de diagnóstico de FinAI irán apareciendo aquí...
+              Tu conversación y las preguntas de diagnóstico irán apareciendo aquí...
             </div>
           </div>
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex justify-end">
           <button onclick="finalizeDiagnosis()" id="finishChatBtn" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition disabled:opacity-50" disabled>
-            <span>Ver la Mejor Solución & Por Qué</span>
+            <span>Ver Estrategias & Bancos Aliados</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -188,7 +187,7 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 2: LA MEJOR ESTRATEGIA Y SU POR QUÉ DETALLADO -->
+    <!-- PANTALLA 2: ESTRATEGIAS, DETALLES & ENTIDADES RECOMENDADAS -->
     <!-- ======================================================== -->
     <div id="screen2" class="hidden space-y-4">
       
@@ -197,7 +196,7 @@
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800">
             <i data-lucide="award" class="w-4 h-4 text-emerald-600"></i>
-            La Mejor Estrategia para Ti (Sin Endeudamiento Excesivo)
+            Estrategia Recomendada
           </div>
           <span id="screen2SelectedTag" class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
             Ruta Seleccionada: A
@@ -205,17 +204,17 @@
         </div>
 
         <h3 id="screen2AdviceTitle" class="text-base md:text-lg font-bold text-slate-900 mb-1">
-          Estrategia Óptima Recomendada
+          Estrategia Óptima de Rendimiento
         </h3>
 
         <!-- Caja destacada: ¿POR QUÉ ES LA MEJOR OPCIÓN? -->
         <div class="my-3 p-3.5 bg-white/90 rounded-xl border border-emerald-200">
           <div class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider mb-1 flex items-center gap-1.5">
             <i data-lucide="help-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
-            ¿Por qué esta es la mejor de todas las posibilidades?
+            ¿Por qué esta es la mejor opción para tu caso?
           </div>
           <p id="screen2WhyBest" class="text-xs text-slate-700 leading-relaxed font-medium">
-            Explicación clara de por qué esta alternativa protege tu patrimonio y evita pagar intereses bancarios.
+            Explicación matemática de por qué esta alternativa protege tu dinero y te hace ganar rendimientos.
           </p>
         </div>
 
@@ -226,7 +225,7 @@
             <span id="screen2StatSavings" class="font-bold font-mono text-emerald-700 text-sm">$0</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Aporte Mensual Propio</span>
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Aporte Mensual</span>
             <span id="screen2StatMonthly" class="font-bold font-mono text-slate-800 text-sm">$0</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
@@ -234,7 +233,7 @@
             <span id="screen2StatHorizon" class="font-bold font-mono text-cyan-700 text-sm">Por calcular</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Vehículo Principal</span>
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Instrumento Clave</span>
             <span id="screen2StatVehicle" class="font-bold font-mono text-slate-800 text-sm">CDT / Ahorro</span>
           </div>
         </div>
@@ -245,12 +244,55 @@
         <div class="flex items-center justify-between mb-2.5 px-1">
           <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
             <i data-lucide="layers" class="w-4 h-4 text-emerald-600"></i>
-            Todas las posibilidades analizadas:
+            Opciones Comparadas (Toca para cambiar):
           </h4>
-          <span class="text-[11px] text-slate-400">Toca para cambiar de ruta si lo prefieres</span>
+          <span class="text-[11px] text-slate-400">Selección activa garantizada</span>
         </div>
 
         <div id="screen2OptionsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+      </div>
+
+      <!-- PANEL DE PROFUNDIZACIÓN Y BANCOS RECOMENDADOS (LO NUEVO) -->
+      <div id="screen2DeepDivePanel" class="card-clean rounded-2xl p-5 border-slate-200 bg-slate-50/70">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">
+              ⚡
+            </div>
+            <div>
+              <h4 id="deepDiveTitle" class="text-xs font-bold text-slate-900">
+                Detalles & Entidades Recomendadas para la Ruta A
+              </h4>
+              <p class="text-[11px] text-slate-500">Dónde abrir y qué condiciones buscar en el mercado real</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white text-emerald-700 border border-slate-200">
+            Entidades Verificadas
+          </span>
+        </div>
+
+        <!-- Descripción Ampliada de la Opción Seleccionada -->
+        <p id="deepDiveDescription" class="text-xs text-slate-700 leading-relaxed mb-4 p-3 bg-white rounded-xl border border-slate-200">
+          Cargando recomendaciones específicas para esta ruta...
+        </p>
+
+        <!-- Grid de Bancos / Fintechs Recomendados con Enlaces -->
+        <div>
+          <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-2">
+            🏛️ Entidades sugeridas para esta opción:
+          </span>
+          <div id="recommendedBanksGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Advertencia o Tip de Experto -->
+        <div class="mt-3.5 p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2 text-xs text-amber-900">
+          <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+          <p id="deepDiveTip" class="text-[11px] leading-relaxed">
+            <strong>Tip FinAI:</strong> Recuerda verificar que el CDT o la cuenta cuente con seguro de depósito FOGAFÍN (cobertura hasta $50.000.000) y cero costos de manejo.
+          </p>
+        </div>
       </div>
 
       <!-- Barra de Ajuste por Voz -->
@@ -258,7 +300,7 @@
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
             <i data-lucide="mic" class="w-4 h-4 text-emerald-600"></i>
-            ¿Prefieres otra alternativa o quieres agregar otro dato? Háblale a FinAI:
+            ¿Quieres preguntar más sobre este banco o ajustar la opción? Háblale a FinAI:
           </span>
           <span id="screen2VoiceStatus" class="text-[10px] font-mono text-slate-400">Micrófono disponible</span>
         </div>
@@ -276,7 +318,7 @@
           <input 
             id="negotiateInput"
             type="text" 
-            placeholder="Ej: 'Prefiero usar cesantías en vez de CDT' o '¿Cuánto me gano en intereses con el CDT?'" 
+            placeholder="Ej: '¿Por qué recomiendas Nu o Pibank en vez de Bancolombia?' o 'Prefiero pagar con cesantías'" 
             class="flex-1 bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 outline-none focus:border-emerald-500"
             onkeydown="if(event.key==='Enter') submitNegotiation()"
           />
@@ -339,11 +381,11 @@
             <ul class="text-xs text-slate-700 space-y-1.5">
               <li class="flex items-start gap-1.5">
                 <span class="text-emerald-600 font-bold">✓</span>
-                <span id="valUserImpact">Estrategia pro-usuario: cero intereses bancarios innecesarios.</span>
+                <span id="valUserImpact">Entidades reales con links directos y tasas transparentes.</span>
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-emerald-600 font-bold">✓</span>
-                <span>Diagnóstico real: no se inventan números, se pregunta primero con empatía.</span>
+                <span>Instrucción paso a paso y libertad total para escoger el banco o cooperativa.</span>
               </li>
             </ul>
           </div>
@@ -355,11 +397,11 @@
             <ul class="text-xs text-slate-700 space-y-1.5">
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Apertura de Instrumentos de Ahorro:</strong> Comisión de colocación de CDT digitales y cuentas remuneradas.</span>
+                <span><strong>Monetización de Afiliados:</strong> Comisión por usuario que abre CDT o cuenta en bancos recomendados (Nu, Lulo, Pibank).</span>
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Calificación de Leads Reales:</strong> Los datos descubiertos permiten ofrecer productos exactos al perfil.</span>
+                <span><strong>Marketplace Fintech:</strong> Red de colocación directa que conecta usuarios informados con productos financieros idóneos.</span>
               </li>
             </ul>
           </div>
@@ -410,41 +452,100 @@
     let isScreen2Listening = false;
     let turnCount = 0;
 
+    // Catálogo de entidades colombianas con logos visuales, enlaces oficiales y beneficios
+    const BANK_CATALOG = {
+      pibank: {
+        name: "Pibank",
+        logo: "🏦",
+        badgeColor: "bg-orange-50 text-orange-700 border-orange-200",
+        rate: "~11.2% E.A.",
+        perk: "Mejores tasas en CDT digital sin monto mínimo",
+        url: "https://www.pibank.co"
+      },
+      nubank: {
+        name: "Nu Colombia",
+        logo: "💜",
+        badgeColor: "bg-purple-50 text-purple-700 border-purple-200",
+        rate: "~12.0% E.A.",
+        perk: "Cajitas de ahorro con liquidez diaria y rendimiento",
+        url: "https://nu.com.co"
+      },
+      lulobank: {
+        name: "Lulo Bank",
+        logo: "🟢",
+        badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        rate: "~11.5% E.A.",
+        perk: "Bolsillos remunerados y cashback en compras",
+        url: "https://www.lulobank.com"
+      },
+      bancolombia: {
+        name: "Bancolombia",
+        logo: "🟡",
+        badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
+        rate: "Tasa Fija",
+        perk: "Retiro y pago directo de cesantías para estudio",
+        url: "https://www.bancolombia.com"
+      },
+      icetex: {
+        name: "Icetex / Cooperativas",
+        logo: "🎓",
+        badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
+        rate: "IPC + 0% a 4%",
+        perk: "Líneas subsidiadas con periodo de gracia",
+        url: "https://web.icetex.gov.co"
+      },
+      mejorcdt: {
+        name: "MejorCDT",
+        logo: "📊",
+        badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        rate: "Comparador",
+        perk: "Compara los mejores CDTs de todos los bancos",
+        url: "https://www.mejorcdt.com"
+      }
+    };
+
     let conversationHistory = [
       {
         role: "system",
         content: `Eres FINAI, el asesor financiero más inteligente, transparente y riguroso. Hablas directamente por voz con el usuario.
 
-PROTOCOLO OBLIGATORIO DE DESCUBRIMIENTO FINANCIERO:
-1. NUNCA FORMULES SOLUCIONES A CIEGAS: Si el usuario dice algo vago como "quiero hacer un posgrado pero no tengo dinero", "quiero comprar un carro" o "tengo una deuda", TIENES PROHIBIDO avanzar a las opciones si faltan variables esenciales (costo aproximado del objetivo, ingresos mensuales aproximados o si tiene algún ahorro/cesantías).
-2. PREGUNTAS DE DIAGNÓSTICO: Si faltan datos, DEBES colocar "is_ready_for_solutions": false y en "voice_reply" responder con empatía haciendo UNA O DOS preguntas concretas para saber cuánto vale el posgrado/meta y cuánto gana o le queda libre al mes.
-3. CUANDO HAYA DATOS REALES: Solo cuando conozcas el monto aproximado del objetivo y el ingreso/ahorro del usuario, pon "is_ready_for_solutions": true y formula las 3 opciones detalladas.
-4. FILOSOFÍA PRO-USUARIO: Prioriza siempre recursos propios, ahorro programado de flujo libre y CDT escalonados antes de contemplar deudas. En "why_is_best" explica por qué la mejor opción es superior.
+PROTOCOLO OBLIGATORIO DE DESCUBRIMIENTO:
+1. SIEMPRE PREGUNTA ANTES DE CALCULAR: Si faltan datos clave (costo del posgrado/meta, ingresos mensuales o ahorros), pon "is_ready_for_solutions": false y en "voice_reply" haz una pregunta empática.
+2. CUANDO HAYA DATOS REALES: Pon "is_ready_for_solutions": true y formula las 3 opciones.
+3. ENTIDADES Y BANCOS ALIADOS: En cada opción, incluye una lista de entidades recomendadas ("recommended_institutions") con claves como "pibank", "nubank", "lulobank", "bancolombia", "icetex" o "mejorcdt". Explica en "deep_dive_description" cómo ejecutar esa opción con esas entidades.
+4. FILOSOFÍA PRO-USUARIO: No empujes deudas; prioriza CDTs escalonados y ahorro de flujo propio.
 
-FORMATO JSON OBLIGATORIO:
+FORMATO JSON ESTRICTO:
 {
-  "voice_reply": "Mensaje en español de 1 a 3 frases. Si faltan datos, pregunta el costo y los ingresos aquí.",
+  "voice_reply": "Mensaje en español de 1 a 3 frases claras.",
   "is_ready_for_solutions": true o false,
   "detected_variables": {
-    "goal": "Nombre de la meta (ej: Posgrado/Certificado) o null",
-    "approx_cost": "Costo estimado detectado (ej: $18.000.000) o null",
-    "monthly_income_or_savings": "Ingreso/ahorro detectado o null"
+    "goal": "Nombre de la meta o null",
+    "approx_cost": "Costo estimado detectado o null",
+    "monthly_income_or_savings": "Ingreso/ahorro o null"
   },
-  "best_option_title": "Nombre de la mejor opción (solo si is_ready_for_solutions es true)",
-  "why_is_best": "Explicación detallada del por qué (solo si is_ready_for_solutions es true)",
+  "best_option_title": "Nombre de la mejor opción",
+  "why_is_best": "Explicación clara del por qué es la mejor posibilidad para el usuario.",
   "options": [
     {
       "name": "Estrategia CDT Escalonado + Rendimientos",
-      "impact": "Ahorro de intereses",
-      "monthly_cost": "Aporte mensual necesario",
-      "horizon": "Meses reales",
-      "vehicle": "CDT digital / Ahorro remunerado",
-      "pros": "Ventaja",
-      "cons": "Sacrificio",
+      "impact": "Ahorro de $3.200.000",
+      "monthly_cost": "$833.000/mes",
+      "horizon": "30 meses (2.5 años)",
+      "vehicle": "CDT digital a 180 días (~11.2% EA)",
+      "pros": "Ganas intereses antes de cada matrícula",
+      "cons": "Inmoviliza capital en bloques de 6 meses",
       "is_best": true,
-      "steps": ["Paso 1", "Paso 2", "Paso 3"],
-      "chart_original": 20000000,
-      "chart_optimized": 18000000
+      "deep_dive_description": "Constituye un CDT a 180 días en entidades digitales como Pibank o MejorCDT con el ahorro acumulado. Los intereses ganados se reinvierten para pagar parte del siguiente semestre.",
+      "recommended_institutions": ["pibank", "mejorcdt", "nubank"],
+      "expert_tip": "Revisa que la entidad esté vigilada por la Superfinanciera y amparada por FOGAFÍN.",
+      "steps": [
+        "Aportes mensuales de $833.000 a cuenta remunerada",
+        "Constitución de CDT a 180 días antes de cada matrícula",
+        "Pago directo con capital + intereses generados"
+      ],
+      "chart_original": 28500000,
+      "chart_optimized": 25000000
     }
   ]
 }`
@@ -558,7 +659,7 @@ FORMATO JSON OBLIGATORIO:
         document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold animate-pulse";
         
         if (turnCount === 0) {
-          const bienvenida = "Hola, soy FinAI. Cuéntame qué meta o gasto tienes en mente y buscaremos cómo lograrlo sin que te cueste una fortuna.";
+          const bienvenida = "Hola, soy FinAI. Cuéntame qué meta o gasto tienes en mente y buscaremos las mejores opciones con bancos y CDTs sin que te cueste de más.";
           appendDialogue("ai", bienvenida);
           speakAI(bienvenida, () => {
             if (isCallActive) startListening();
@@ -576,8 +677,8 @@ FORMATO JSON OBLIGATORIO:
       appendDialogue("user", userText);
 
       conversationHistory.push({ role: "user", content: userText });
-      document.getElementById("callHeading").innerText = "FinAI analizando...";
-      document.getElementById("callSubheading").innerText = "Evaluando si se requieren más datos para diagnosticar...";
+      document.getElementById("callHeading").innerText = "FinAI analizando opciones bancarias...";
+      document.getElementById("callSubheading").innerText = "Verificando tasas reales y requisitos de diagnóstico...";
 
       const aiResponse = await callGroqAPI();
 
@@ -585,14 +686,12 @@ FORMATO JSON OBLIGATORIO:
         activeData = aiResponse;
         appendDialogue("ai", aiResponse.voice_reply);
 
-        // Actualizar variables detectadas en la UI
         if (aiResponse.detected_variables) {
           if (aiResponse.detected_variables.goal) document.getElementById("tagGoal").innerText = aiResponse.detected_variables.goal;
           if (aiResponse.detected_variables.approx_cost) document.getElementById("tagCost").innerText = aiResponse.detected_variables.approx_cost;
           if (aiResponse.detected_variables.monthly_income_or_savings) document.getElementById("tagIncome").innerText = aiResponse.detected_variables.monthly_income_or_savings;
         }
 
-        // SI FALTAN DATOS: se queda en la charla y repregunta
         if (!aiResponse.is_ready_for_solutions) {
           document.getElementById("finishChatBtn").disabled = true;
           speakAI(aiResponse.voice_reply, () => {
@@ -600,9 +699,7 @@ FORMATO JSON OBLIGATORIO:
               setTimeout(() => { if (isCallActive) startListening(); }, 500);
             }
           });
-        } 
-        // SI YA TIENE DATOS: avanza a la Pantalla 2
-        else {
+        } else {
           document.getElementById("finishChatBtn").disabled = false;
           speakAI(aiResponse.voice_reply, () => {
             finalizeDiagnosis();
@@ -636,7 +733,7 @@ FORMATO JSON OBLIGATORIO:
     }
 
     // ==========================================
-    // LLAMADA A GROQ CON DIAGNÓSTICO RIGUROSO
+    // LLAMADA A GROQ
     // ==========================================
     async function callGroqAPI() {
       const rawKey = (localStorage.getItem("groq_api_key") || "").trim();
@@ -671,16 +768,16 @@ FORMATO JSON OBLIGATORIO:
         }
       }
 
-      // Fallback inteligente: detecta si faltan números en la última frase del usuario
+      // Fallback inteligente
       const lastUserMsg = conversationHistory[conversationHistory.length - 1].content.toLowerCase();
       const hasNumbers = /\d+/.test(lastUserMsg);
 
       if (!hasNumbers) {
         return {
-          voice_reply: "Hacer un posgrado es una excelente inversión en ti. Para darte la mejor estrategia sin que te ahogues en deudas, cuéntame: ¿cuánto vale aproximadamente el programa y cuánto ganas o tienes ahorrado?",
+          voice_reply: "Hacer un posgrado es una excelente decisión para tu carrera. Para recomendarte el mejor CDT o plan de ahorro sin deudas, cuéntame: ¿cuánto vale aproximadamente el programa y cuánto ganas o tienes ahorrado?",
           is_ready_for_solutions: false,
           detected_variables: {
-            goal: "Posgrado / Especialización",
+            goal: "Posgrado / Certificado",
             approx_cost: "Por definir",
             monthly_income_or_savings: "Pendiente"
           }
@@ -688,73 +785,82 @@ FORMATO JSON OBLIGATORIO:
       }
 
       return {
-        voice_reply: "Perfecto, con esos números claros he diseñado la mejor estrategia: utilizaremos un CDT escalonado a 180 días con tus ahorros para que el dinero genere rendimientos antes de cada desembolso.",
+        voice_reply: "Excelente. Cubrir 5 semestres son 25 millones en 30 meses. La mejor opción es estructurarlo con CDTs escalonados a 180 días en Pibank o Nu para ganar rendimientos antes de cada desembolso.",
         is_ready_for_solutions: true,
         detected_variables: {
-          goal: "Posgrado / Certificado",
-          approx_cost: "$18.000.000",
-          monthly_income_or_savings: "$4.000.000 / mes"
+          goal: "5 Semestres de Universidad",
+          approx_cost: "$25.000.000",
+          monthly_income_or_savings: "$3.500.000 / mes"
         },
-        best_option_title: "Estrategia CDT Escalonado + Flujo de Ahorro",
-        why_is_best: "Es la mejor de todas las posibilidades porque no pagas ni un solo peso en intereses bancarios de créditos de consumo. Al contrario, tus aportes mensuales a un CDT a 180 días generan rendimientos que financian parte de la matrícula.",
+        best_option_title: "Estrategia CDT Escalonado + Rendimientos",
+        why_is_best: "Es la mejor alternativa porque evita pagar más de $3.8 millones en intereses bancarios de créditos comerciales y pone a rentar tu dinero al ~11.2% EA en bloques semestrales antes de cada pago.",
         options: [
           {
-            name: "Estrategia CDT Escalonado + Rendimientos",
-            impact: "Ahorro de $2.800.000 en intereses",
-            monthly_cost: "$750.000/mes",
-            horizon: "24 meses",
-            vehicle: "CDT Digital a 180 días (~11% EA)",
-            pros: "Tus recursos generan rendimientos antes de pagar",
-            cons: "Inmoviliza el dinero por periodos de 6 meses",
+            name: "Ruta A: CDT Escalonado + Rendimientos",
+            impact: "Ahorro de $3.800.000",
+            monthly_cost: "$833.000/mes",
+            horizon: "30 meses (2.5 años)",
+            vehicle: "CDT digital a 180 días (~11.2% E.A.)",
+            pros: "Tus recursos ganan intereses antes de pagar cada matrícula",
+            cons: "El capital se inmoviliza en bloques de 6 meses",
             is_best: true,
+            deep_dive_description: "Constituye CDTs semestrales a 180 días utilizando Pibank o MejorCDT para rentar al 11.2% EA. Con un aporte mensual de $833k en una cuenta remunerada (Nu o Lulo al 12%), consolidas la cuota semestral sin pagar intereses.",
+            recommended_institutions: ["pibank", "mejorcdt", "nubank"],
+            expert_tip: "Abre los CDTs de forma digital para obtener tasas preferenciales y cero comisiones de apertura.",
             steps: [
-              "Aportes mensuales de $750.000 a cuenta de alto rendimiento",
-              "Constitución de CDT a 180 días previo a cada semestre",
-              "Pago de matrícula al vencimiento sumando los rendimientos"
+              "Aportes mensuales de $833.000 a cuenta de alta rentabilidad",
+              "Constituir CDT a 180 días previo a cada semestre",
+              "Pagar la matrícula al vencimiento sumando los rendimientos"
             ],
-            chart_original: 21200000,
-            chart_optimized: 18000000
+            chart_original: 28800000,
+            chart_optimized: 25000000
           },
           {
-            name: "Ahorro Programado + Cesantías",
-            impact: "Cero deuda bancaria",
-            monthly_cost: "$550.000/mes",
-            horizon: "24 meses",
-            vehicle: "Bolsillo de Ahorro + Fondo de Cesantías",
-            pros: "Aprovecha recursos ya disponibles de cesantías",
+            name: "Ruta B: Ahorro Programado + Cesantías",
+            impact: "Cero endeudamiento",
+            monthly_cost: "$650.000/mes",
+            horizon: "30 meses",
+            vehicle: "Bolsillos de Ahorro + Fondo de Cesantías",
+            pros: "No asumes créditos ni papeleos bancarios",
             cons: "Compromete el fondo de cesantías laboral",
             is_best: false,
+            deep_dive_description: "Aprovecha el retiro anticipado de cesantías para educación (Bancolombia o Protección) complementándolo con un bolsillo de ahorro automático en Lulo Bank para ganar cashback.",
+            recommended_institutions: ["bancolombia", "lulobank"],
+            expert_tip: "Solicita el certificado de matrícula a la universidad con 15 días de anticipación para el trámite de cesantías.",
             steps: [
-              "Retiro parcial de cesantías anuales para estudio",
-              "Completar la cuota con ahorro mensual de $550k",
+              "Retiro de cesantías anuales certificado para estudio",
+              "Aporte complementario mensual en bolsillo de ahorro",
               "Pago de contado directo a la institución"
             ],
-            chart_original: 21200000,
-            chart_optimized: 18000000
+            chart_original: 28800000,
+            chart_optimized: 25000000
           },
           {
-            name: "Crédito Educativo de Fomento Blando",
+            name: "Ruta C: Crédito Educativo de Fomento Blando",
             impact: "Inicio inmediato",
-            monthly_cost: "$890.000/mes",
-            horizon: "24 meses",
-            vehicle: "Crédito Educativo Cooperativa",
+            monthly_cost: "$920.000/mes",
+            horizon: "36 meses",
+            vehicle: "Línea de Fomento / Cooperativa / Icetex",
             pros: "Permite estudiar ya sin esperar a reunir el dinero",
-            cons: "Interés de fomento del 1.1% mensual",
+            cons: "Costo financiero por intereses de fomento",
             is_best: false,
+            deep_dive_description: "Líneas de financiamiento educativo con Icetex o cooperativas universitarias con tasas subsidiadas de fomento para pagar en cuotas fijas.",
+            recommended_institutions: ["icetex"],
+            expert_tip: "Prioriza líneas a corto plazo donde cancelas el semestre mientras lo cursas para no acumular deuda.",
             steps: [
               "Aprobación de crédito rotativo de fomento",
-              "Pago en 24 cuotas fijas",
-              "Abono extraordinario con primas semestrales"
+              "Desembolso directo a la universidad cada 6 meses",
+              "Amortización constante con primas semestrales"
             ],
-            chart_original: 21200000,
-            chart_optimized: 20400000
+            chart_original: 28800000,
+            chart_optimized: 27800000
           }
         ]
       };
     }
 
     // ==========================================
-    // PANTALLA 2: ESTRATEGIA DETALLADA
+    // PANTALLA 2: ESTRATEGIAS, DETALLES & BANCOS
     // ==========================================
     function finalizeDiagnosis() {
       if (isCallActive) {
@@ -778,19 +884,23 @@ FORMATO JSON OBLIGATORIO:
       if (!activeData || !activeData.options) return;
       const currentOpt = activeData.options[selectedOptionIndex];
 
+      // Encabezado
       document.getElementById("screen2SelectedTag").innerText = `Ruta Seleccionada: ${String.fromCharCode(65 + selectedOptionIndex)}`;
       document.getElementById("screen2AdviceTitle").innerText = currentOpt.name;
 
+      // Explicación de por qué es la mejor
       const whyText = activeData.why_is_best || currentOpt.pros;
       document.getElementById("screen2WhyBest").innerText = whyText;
 
+      // Métricas clave
       document.getElementById("screen2StatSavings").innerText = currentOpt.impact;
       document.getElementById("screen2StatMonthly").innerText = currentOpt.monthly_cost || "N/A";
-      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "24 meses";
+      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "30 meses";
       document.getElementById("screen2StatVehicle").innerText = currentOpt.vehicle || "Instrumento Financiero";
 
       document.getElementById("nextBtnLabel").innerText = `Confirmar Ruta ${String.fromCharCode(65 + selectedOptionIndex)} y Ver Plan`;
 
+      // Tarjetas de Opciones
       const grid = document.getElementById("screen2OptionsGrid");
       grid.innerHTML = "";
 
@@ -841,14 +951,66 @@ FORMATO JSON OBLIGATORIO:
 
         grid.appendChild(card);
       });
+
+      // RENDERIZAR PANEL DE PROFUNDIZACIÓN Y BANCOS ALIADOS
+      renderDeepDiveDetails(currentOpt);
+
       lucide.createIcons();
+    }
+
+    function renderDeepDiveDetails(opt) {
+      document.getElementById("deepDiveTitle").innerText = `Detalles & Entidades Recomendadas: ${opt.name}`;
+      document.getElementById("deepDiveDescription").innerText = opt.deep_dive_description || opt.pros;
+      if (opt.expert_tip) {
+        document.getElementById("deepDiveTip").innerHTML = `<strong>Tip FinAI:</strong> ${opt.expert_tip}`;
+      }
+
+      const banksGrid = document.getElementById("recommendedBanksGrid");
+      banksGrid.innerHTML = "";
+
+      const institutionKeys = opt.recommended_institutions || ["pibank", "nubank", "mejorcdt"];
+
+      institutionKeys.forEach(key => {
+        const bank = BANK_CATALOG[key] || {
+          name: key.toUpperCase(),
+          logo: "🏛️",
+          badgeColor: "bg-slate-100 text-slate-700 border-slate-200",
+          rate: "Tasa Vigente",
+          perk: "Entidad recomendada por FinAI",
+          url: "#"
+        };
+
+        const bankCard = document.createElement("div");
+        bankCard.className = "p-3 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-emerald-300 transition shadow-xs";
+        bankCard.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-900">
+                <span class="text-base">${bank.logo}</span>
+                <span>${bank.name}</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border ${bank.badgeColor}">
+                ${bank.rate}
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-tight mb-2.5">
+              ${bank.perk}
+            </p>
+          </div>
+          <a href="${bank.url}" target="_blank" rel="noopener noreferrer" class="w-full py-1.5 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 hover:border-emerald-200 text-[11px] font-semibold flex items-center justify-center gap-1 transition">
+            <span>Ver entidad</span>
+            <i data-lucide="external-link" class="w-3 h-3"></i>
+          </a>
+        `;
+        banksGrid.appendChild(bankCard);
+      });
     }
 
     function selectOptionByIndex(index) {
       selectedOptionIndex = index;
       const opt = activeData.options[selectedOptionIndex];
       renderScreen2();
-      speakAI(`Has seleccionado ${opt.name}.`);
+      speakAI(`Has seleccionado ${opt.name}. Actualizamos las entidades recomendadas para esta opción.`);
     }
 
     // VOZ EN PANTALLA 2
@@ -862,7 +1024,7 @@ FORMATO JSON OBLIGATORIO:
           isScreen2Listening = true;
           mainRecognition.start();
           document.getElementById("screen2MicBtn").classList.add("bg-rose-500", "animate-pulse");
-          document.getElementById("screen2VoiceStatus").innerText = "🔴 Escuchando... habla tu ajuste ahora";
+          document.getElementById("screen2VoiceStatus").innerText = "🔴 Escuchando... habla tu duda sobre los bancos o la opción";
           document.getElementById("screen2VoiceStatus").classList.add("text-emerald-700", "font-bold");
         } catch(e) {
           console.warn(e);
@@ -892,17 +1054,17 @@ FORMATO JSON OBLIGATORIO:
       if (!text) return;
 
       input.value = "";
-      speakAI("Ajustando la estrategia con tu nuevo planteamiento...");
+      speakAI("Ajustando la recomendación y evaluando las entidades mencionadas...");
 
       const lower = text.toLowerCase();
       if (activeData && activeData.options) {
-        if (lower.includes("opción b") || lower.includes("ruta b")) {
+        if (lower.includes("opción b") || lower.includes("ruta b") || lower.includes("cesantías")) {
           selectOptionByIndex(1);
           return;
-        } else if (lower.includes("opción c") || lower.includes("ruta c")) {
+        } else if (lower.includes("opción c") || lower.includes("ruta c") || lower.includes("crédito")) {
           selectOptionByIndex(2);
           return;
-        } else if (lower.includes("opción a") || lower.includes("ruta a") || lower.includes("cdt")) {
+        } else if (lower.includes("opción a") || lower.includes("ruta a") || lower.includes("cdt") || lower.includes("pibank")) {
           selectOptionByIndex(0);
           return;
         }
@@ -910,7 +1072,7 @@ FORMATO JSON OBLIGATORIO:
 
       conversationHistory.push({
         role: "user",
-        content: `El usuario comenta esto para ajustar la estrategia: "${text}". Reestructura las opciones y actualiza por qué la mejor sigue siéndolo.`
+        content: `El usuario comenta esto para ajustar la estrategia o preguntar por bancos: "${text}". Recuerda sugerir entidades reales (Pibank, Nu, Lulo, Bancolombia, Icetex) y enriquecer la descripción.`
       });
 
       const updated = await callGroqAPI();
@@ -928,10 +1090,11 @@ FORMATO JSON OBLIGATORIO:
     }
 
     // ==========================================
-    // PANTALLA 3: PLAN FINAL GARANTIZADO
+    // PANTALLA 3: PLAN FINAL
     // ==========================================
     function renderScreen3() {
       if (!activeData || !activeData.options) return;
+      
       const opt = activeData.options[selectedOptionIndex];
 
       document.getElementById("finalPlanTitle").innerText = `Plan Definitivo: ${opt.name}`;
@@ -959,9 +1122,9 @@ FORMATO JSON OBLIGATORIO:
       finalChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Costo con Crédito Consumo', `Con ${opt.name.substring(0, 22)}...`],
+          labels: ['Costo con Crédito Consumo', `Con ${opt.name.substring(0, 20)}...`],
           datasets: [{
-            data: [opt.chart_original || 21000000, opt.chart_optimized || 18000000],
+            data: [opt.chart_original || 28800000, opt.chart_optimized || 25000000],
             backgroundColor: ['rgba(225, 29, 72, 0.15)', 'rgba(5, 150, 105, 0.2)'],
             borderColor: ['#E11D48', '#059669'],
             borderWidth: 1.5,
@@ -983,7 +1146,7 @@ FORMATO JSON OBLIGATORIO:
     }
 
     // ==========================================
-    // NAVEGACIÓN Y CONTROL
+    // NAVEGACIÓN
     // ==========================================
     function goToStep(step) {
       document.getElementById("screen1").classList.add("hidden");
@@ -1020,7 +1183,7 @@ FORMATO JSON OBLIGATORIO:
       document.getElementById("tagIncome").innerText = "Pendiente";
       document.getElementById("liveDialogueContainer").innerHTML = `
         <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-          Tu conversación y las preguntas de diagnóstico de FinAI irán apareciendo aquí...
+          Tu conversación y las preguntas de diagnóstico irán apareciendo aquí...
         </div>
       `;
       document.getElementById("finishChatBtn").disabled = true;
