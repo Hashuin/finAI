@@ -76,11 +76,11 @@
           <div class="font-bold tracking-tight text-slate-900 flex items-center gap-2 text-sm md:text-base">
             FINAI LIVE <span id="callBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono">En Espera</span>
           </div>
-          <div class="text-[10px] text-slate-500">Asesoría de Compras, Ahorro Inteligente & Metas</div>
+          <div class="text-[10px] text-slate-500">Asesoría Integral: CDT, Ahorro & Rehabilitación Crediticia</div>
         </div>
       </div>
 
-      <!-- Navegador de 3 Pantallas -->
+      <!-- Navegador 3 Pasos -->
       <div class="flex items-center gap-1.5 text-xs">
         <button id="stepNav1" onclick="goToStep(1)" class="step-pill-active px-3 py-1.5 rounded-xl border border-emerald-300 transition flex items-center gap-1.5 shadow-sm">
           <span class="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 text-[10px] flex items-center justify-center font-bold">1</span>
@@ -89,7 +89,7 @@
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav2" onclick="goToStep(2)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
           <span class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 text-[10px] flex items-center justify-center font-bold">2</span>
-          Estrategias & Tácticas
+          Estrategias & Entidades
         </button>
         <span class="text-slate-300 font-bold">→</span>
         <button id="stepNav3" onclick="goToStep(3)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium transition flex items-center gap-1.5 hover:text-slate-900 hover:bg-slate-100">
@@ -114,7 +114,7 @@
       
       <div class="lg:col-span-7 card-clean rounded-2xl p-6 md:p-8 flex flex-col items-center justify-between min-h-[490px] text-center relative overflow-hidden">
         <div class="w-full flex items-center justify-between">
-          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Descubrimiento Financiero</span>
+          <span class="text-xs font-bold text-emerald-600 font-mono tracking-wider uppercase">Paso 1: Diagnóstico Sin Exclusión</span>
           <span id="speakerStatus" class="text-xs text-slate-500 font-medium flex items-center gap-1">
             <i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i> Audio Activo
           </span>
@@ -137,24 +137,24 @@
             Toca el micrófono para hablar con FinAI
           </h3>
           <p id="callSubheading" class="text-xs text-slate-500 max-w-sm">
-            Cuéntale cualquier compra, artículo o dilema de dinero. FinAI te ayudará a optimizar tu flujo sin endeudarte.
+            Pregunta lo que quieras: compras, metas de ahorro o cómo sanear reportes negativos en centrales de riesgo.
           </p>
         </div>
 
         <!-- Indicador de Variables Detectadas en Vivo -->
         <div class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex flex-wrap items-center justify-around gap-2 text-[11px] text-slate-600">
-          <div>🎯 Meta/Artículo: <span id="tagGoal" class="font-bold text-slate-900 font-mono">Por definir</span></div>
+          <div>🎯 Meta: <span id="tagGoal" class="font-bold text-slate-900 font-mono">Por definir</span></div>
           <div>💰 Monto: <span id="tagCost" class="font-bold text-slate-900 font-mono">Pendiente</span></div>
-          <div>📈 Capacidad: <span id="tagIncome" class="font-bold text-slate-900 font-mono">Pendiente</span></div>
+          <div>🛡️ Estado: <span id="tagIncome" class="font-bold text-slate-900 font-mono">Evaluando</span></div>
         </div>
 
         <div class="w-full pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2">
           <span class="text-[10px] font-bold text-slate-400 uppercase">⚡ Probar Casos:</span>
-          <button onclick="startVoiceWithPreset('Quiero comprarme una laptop para diseño de 4 millones pero no sé si me conviene comprarla ya de contado o qué')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            💻 Compra de Laptop ($4M)
+          <button onclick="startVoiceWithPreset('Estoy reportado en Datacrédito por una deuda de 3 millones y necesito salir de eso para poder pedir crédito de nuevo')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs border border-rose-200 font-medium">
+            🚨 Caso: Reportado en Datacrédito
           </button>
-          <button onclick="startVoiceWithPreset('Quiero comprar una bicicleta de 2 millones, gano 2.8 millones y quiero saber cómo pagarla sin tocar mi fondo de emergencia')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
-            🚲 Bicicleta / Artículo ($2M)
+          <button onclick="startVoiceWithPreset('Necesito pagar 5 semestres de universidad de 5 millones cada uno. Gano 3.5 millones y quiero saber qué banco o CDT me sirve sin endeudarme')" class="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 text-xs border border-slate-200">
+            📚 5 Semestres ($25M)
           </button>
         </div>
       </div>
@@ -172,14 +172,14 @@
 
           <div id="liveDialogueContainer" class="space-y-2.5 overflow-y-auto h-[340px] pr-1 text-xs">
             <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-              Tu conversación y las preguntas de diagnóstico irán apareciendo aquí...
+              Tu conversación y el diagnóstico de FinAI irán apareciendo aquí...
             </div>
           </div>
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex justify-end">
           <button onclick="finalizeDiagnosis()" id="finishChatBtn" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition disabled:opacity-50" disabled>
-            <span>Ver Estrategias & Recomendaciones</span>
+            <span>Ver Estrategias & Entidades</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -188,7 +188,7 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- PANTALLA 2: ESTRATEGIAS, DETALLES & RECOMENDACIONES -->
+    <!-- PANTALLA 2: ESTRATEGIAS, DETALLES & ENTIDADES -->
     <!-- ======================================================== -->
     <div id="screen2" class="hidden space-y-4">
       
@@ -205,7 +205,7 @@
         </div>
 
         <h3 id="screen2AdviceTitle" class="text-base md:text-lg font-bold text-slate-900 mb-1">
-          Estrategia Inteligente para tu Compra
+          Estrategia Óptima de Recuperación
         </h3>
 
         <!-- Caja destacada: ¿POR QUÉ ES LA MEJOR OPCIÓN? -->
@@ -215,7 +215,7 @@
             ¿Por qué esta es la mejor opción para tu caso?
           </div>
           <p id="screen2WhyBest" class="text-xs text-slate-700 leading-relaxed font-medium">
-            Explicación de por qué esta alternativa protege tu patrimonio, evita gastos innecesarios y optimiza tu dinero.
+            Explicación legal y financiera de por qué esta alternativa soluciona tu problema sin cobrarte intermediarios innecesarios.
           </p>
         </div>
 
@@ -226,16 +226,16 @@
             <span id="screen2StatSavings" class="font-bold font-mono text-emerald-700 text-sm">$0</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Aporte / Esfuerzo</span>
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Aporte / Cuota</span>
             <span id="screen2StatMonthly" class="font-bold font-mono text-slate-800 text-sm">$0</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Tiempo / Plazo</span>
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Plazo / Tiempo</span>
             <span id="screen2StatHorizon" class="font-bold font-mono text-cyan-700 text-sm">Por calcular</span>
           </div>
           <div class="p-2.5 bg-white rounded-xl border border-slate-200">
-            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Táctica Principal</span>
-            <span id="screen2StatVehicle" class="font-bold font-mono text-slate-800 text-sm">Ahorro / Flujo</span>
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Canal Principal</span>
+            <span id="screen2StatVehicle" class="font-bold font-mono text-slate-800 text-sm">Fintech / Legal</span>
           </div>
         </div>
       </div>
@@ -253,7 +253,7 @@
         <div id="screen2OptionsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
       </div>
 
-      <!-- PANEL DE PROFUNDIZACIÓN Y RECOMENDACIONES TÁCTICAS -->
+      <!-- PANEL DE PROFUNDIZACIÓN Y CANALES RECOMENDADOS -->
       <div id="screen2DeepDivePanel" class="card-clean rounded-2xl p-5 border-slate-200 bg-slate-50/70">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
@@ -262,25 +262,25 @@
             </div>
             <div>
               <h4 id="deepDiveTitle" class="text-xs font-bold text-slate-900">
-                Detalles & Recomendaciones Tácticas para la Ruta A
+                Detalles & Canales Recomendados para la Ruta A
               </h4>
-              <p class="text-[11px] text-slate-500">Cómo ejecutar esta compra de forma óptima</p>
+              <p class="text-[11px] text-slate-500">Entidades y pasos verificados para ejecutar esta opción</p>
             </div>
           </div>
           <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white text-emerald-700 border border-slate-200">
-            Estrategia Verificada
+            Canales Verificados
           </span>
         </div>
 
-        <!-- Descripción Ampliada de la Opción Seleccionada -->
+        <!-- Descripción Ampliada -->
         <p id="deepDiveDescription" class="text-xs text-slate-700 leading-relaxed mb-4 p-3 bg-white rounded-xl border border-slate-200">
           Cargando recomendaciones específicas para esta ruta...
         </p>
 
-        <!-- Grid de Instrumentos / Entidades Sugeridas con Enlaces -->
+        <!-- Grid de Canales / Fintechs / Entidades con Enlaces -->
         <div>
           <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-2">
-            🏛️ Canales e Instrumentos Sugeridos:
+            🏛️ Entidades sugeridas para esta opción:
           </span>
           <div id="recommendedBanksGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5"></div>
         </div>
@@ -289,7 +289,7 @@
         <div class="mt-3.5 p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2 text-xs text-amber-900">
           <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
           <p id="deepDiveTip" class="text-[11px] leading-relaxed">
-            <strong>Tip FinAI:</strong> Aplica la regla de las 72 horas para compras discrecionales y utiliza bolsillos separados para no mezclar dinero de gastos fijos.
+            <strong>Tip FinAI:</strong> Desconfía de intermediarios que prometen "borrar tu reporte en 24 horas a cambio de dinero". El reporte solo se retira por caducidad legal, paz y salvo o derecho de petición ante la central.
           </p>
         </div>
       </div>
@@ -317,7 +317,7 @@
           <input 
             id="negotiateInput"
             type="text" 
-            placeholder="Ej: '¿Y si lo compro usado o espero al día sin IVA?' o 'Prefiero pagar a 1 cuota'" 
+            placeholder="Ej: '¿Y qué pasa si ya pagué pero no me bajan el reporte?' o '¿Puedo pedir crédito por libranza?'" 
             class="flex-1 bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 outline-none focus:border-emerald-500"
             onkeydown="if(event.key==='Enter') submitNegotiation()"
           />
@@ -365,7 +365,7 @@
           </div>
 
           <div class="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <div class="text-[10px] text-slate-500 uppercase font-mono font-semibold mb-2">Impacto Financiero: Compra Impulsiva vs Compra Inteligente</div>
+            <div class="text-[10px] text-slate-500 uppercase font-mono font-semibold mb-2">Simulación Visual: Deuda y Reporte vs Rehabilitación</div>
             <div class="h-28 w-full">
               <canvas id="finalImpactChart"></canvas>
             </div>
@@ -380,11 +380,11 @@
             <ul class="text-xs text-slate-700 space-y-1.5">
               <li class="flex items-start gap-1.5">
                 <span class="text-emerald-600 font-bold">✓</span>
-                <span id="valUserImpact">Tácticas aplicables para cualquier artículo sin endeudarse.</span>
+                <span id="valUserImpact">Ruta clara de rehabilitación crediticia sin engaños ni costos de tramitadores.</span>
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-emerald-600 font-bold">✓</span>
-                <span>Claridad sobre costo por uso y protección del flujo de efectivo.</span>
+                <span>Inclusión financiera real para usuarios excluidos del sistema tradicional.</span>
               </li>
             </ul>
           </div>
@@ -396,11 +396,11 @@
             <ul class="text-xs text-slate-700 space-y-1.5">
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Afiliación y Cashback:</strong> Comisiones por compras inteligentes en comercios y cuentas aliadas.</span>
+                <span><strong>Originación con Fintechs y Cooperativas:</strong> Comisiones por colocación de microcréditos de inclusión y libranzas.</span>
               </li>
               <li class="flex items-start gap-1.5">
                 <span class="text-sky-600 font-bold">$</span>
-                <span><strong>Uso Cotidiano Recurrente:</strong> El usuario recurre a FinAI para compras semanales y no solo deudas.</span>
+                <span><strong>Mercado Masivo Desatendido:</strong> Acceso a un segmento con alta demanda y fidelización superior.</span>
               </li>
             </ul>
           </div>
@@ -451,14 +451,14 @@
     let isScreen2Listening = false;
     let turnCount = 0;
 
-    // Catálogo extendido de canales para compras generales y ahorro
+    // Catálogo extendido con entidades de inclusión y saneamiento para reportados
     const BANK_CATALOG = {
       pibank: {
         name: "Pibank",
         logo: "🏦",
         badgeColor: "bg-orange-50 text-orange-700 border-orange-200",
         rate: "~11.2% E.A.",
-        perk: "Ideal para guardar fondos de metas a 6 meses",
+        perk: "CDT digital a 180 días sin monto mínimo",
         url: "https://www.pibank.co"
       },
       nubank: {
@@ -466,40 +466,48 @@
         logo: "💜",
         badgeColor: "bg-purple-50 text-purple-700 border-purple-200",
         rate: "~12.0% E.A.",
-        perk: "Aparta dinero para la compra con disponibilidad diaria",
+        perk: "Ahorro con rendimiento diario a la vista",
         url: "https://nu.com.co"
+      },
+      monet: {
+        name: "Monet Colombia",
+        logo: "⚡",
+        badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        rate: "Inclusión / Reportados",
+        perk: "Presta a reportados y genera reportes positivos para sanear tu score",
+        url: "https://monet.com.co"
+      },
+      fincomercio: {
+        name: "Fincomercio / Cooperativas",
+        logo: "🤝",
+        badgeColor: "bg-blue-50 text-blue-800 border-blue-200",
+        rate: "Libranza / Convenio",
+        perk: "Crédito por libranza evaluando estabilidad laboral sin mirar centrales",
+        url: "https://www.fincomercio.com"
+      },
+      datacredito: {
+        name: "Datacrédito (Midatacrédito)",
+        logo: "📋",
+        badgeColor: "bg-slate-50 text-slate-800 border-slate-300",
+        rate: "Portal Oficial",
+        perk: "Consulta tu historial gratis y radica solicitudes de caducidad legal",
+        url: "https://www.midatacredito.com"
+      },
+      icetex: {
+        name: "Icetex / Cooperativas",
+        logo: "🎓",
+        badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
+        rate: "Líneas Subsidiadas",
+        perk: "Crédito educativo con tasas de fomento y periodos de gracia",
+        url: "https://web.icetex.gov.co"
       },
       lulobank: {
         name: "Lulo Bank",
         logo: "🟢",
         badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
         rate: "Cashback + 11.5%",
-        perk: "Devuelve dinero en compras con tarjeta débito",
+        perk: "Bolsillos remunerados y cero cuotas de manejo",
         url: "https://www.lulobank.com"
-      },
-      mercadolibre: {
-        name: "Mercado Pago / Libre",
-        logo: "🤝",
-        badgeColor: "bg-yellow-50 text-yellow-800 border-yellow-200",
-        rate: "Comercio Seguro",
-        perk: "Compara precios y compra protegida",
-        url: "https://www.mercadolibre.com.co"
-      },
-      amazon: {
-        name: "Amazon Colombia",
-        logo: "📦",
-        badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
-        rate: "Envío Gratis > $35",
-        perk: "Precios internacionales sin sobrecostos locales",
-        url: "https://www.amazon.com"
-      },
-      bancolombia: {
-        name: "Bancolombia Bolsillos",
-        logo: "🟡",
-        badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
-        rate: "Cero Costo",
-        perk: "Bolsillos automáticos para apartar dinero de compras",
-        url: "https://www.bancolombia.com"
       }
     };
 
@@ -508,47 +516,87 @@
         role: "system",
         content: `Eres FINAI, el asesor financiero más inteligente, transparente y riguroso. Hablas directamente por voz con el usuario.
 
-MANEJO DE CUALQUIER COMPRA O GASTO:
-1. SI ES UNA COMPRA DE CUALQUIER ARTÍCULO (celular, laptop, ropa, viaje, moto, televisor, etc.):
-   - No saltes a sugerir créditos.
-   - Aplica estrategias inteligentes:
-     a) Regla de las 72 horas / Evaluación de Costo por Uso (Cost-per-use).
-     b) Fondo de Amortización (Sinking Fund): Dividir la compra en apartados semanales/quincenales en cuentas con rendimiento a la vista (Cajitas Nu, Bolsillos Lulo).
-     c) Trade-off o sustitución: Recortar temporalmente rubros prescindibles (delivery, ocio) para pagar de contado en 1 o 2 meses sin tocar el fondo de emergencia.
-2. DIAGNÓSTICO: Si no conoces el precio aproximado del artículo o lo que la persona gana o tiene libre al mes, pon "is_ready_for_solutions": false y en "voice_reply" haz una pregunta directa y cercana.
-3. EXPLICACIÓN DEL POR QUÉ: En "why_is_best" explica por qué la mejor opción es la mejor (evita intereses, analiza el costo por uso y protege la liquidez).
+MANEJO DE CASOS DE REPORTADOS EN CENTRALES DE RIESGO:
+1. SI EL USUARIO DICE QUE ESTÁ REPORTADO O EN MORA:
+   - Sé muy empático: aclárale que estar reportado no es una condena definitiva y que hay salidas legales y financieras reales.
+   - Aplica las 3 rutas maestras para reportados:
+     a) Ruta A (Caducidad y Saneamiento Legal - Ley de Habeas Data): Si pagó la deuda, el reporte dura máximo el doble de la mora o 4 años. Si nunca pagó pero ya pasaron 8 años desde la mora, el reporte CADUCA legalmente y puede solicitar su retiro formal ante DataCrédito/Cifín.
+     b) Ruta B (Libranza con Cooperativas): Descuento por nómina (ej: Fincomercio, Confiar) donde prestan con base en estabilidad laboral y capacidad de pago, sin importar el reporte.
+     c) Ruta C (Fintechs de Inclusión para Reconstruir Score): Microcréditos regulados (ej: Monet) que evalúan flujo bancario y reportan pagos puntuales en positivo a las centrales para subir el puntaje de nuevo.
+2. DIAGNÓSTICO: Si no conoces el monto de la deuda, el tiempo que lleva o si tiene ingresos actuales, pon "is_ready_for_solutions": false y en "voice_reply" haz una pregunta cercana sobre cuánto debe y hace cuánto entró en mora.
+3. FILOSOFÍA PRO-USUARIO: Adviértele que nunca pague a tramitadores falsos que prometen "borrar reportes en 24 horas".
 
-FORMATO JSON ESTRICTO:
+FORMATO JSON OBLIGATORIO:
 {
   "voice_reply": "Mensaje en español de 1 a 3 frases claras.",
   "is_ready_for_solutions": true o false,
   "detected_variables": {
-    "goal": "Nombre del artículo o meta (ej: Laptop para diseño)",
-    "approx_cost": "Costo estimado detectado o null",
-    "monthly_income_or_savings": "Capacidad o ingreso detectado o null"
+    "goal": "Saneamiento de Reporte / Financiación",
+    "approx_cost": "Monto de la deuda o null",
+    "monthly_income_or_savings": "Ingresos/capacidad o null"
   },
-  "best_option_title": "Nombre de la mejor estrategia de compra",
-  "why_is_best": "Explicación detallada del por qué es la mejor opción frente a comprar a cuotas o endeudarse.",
+  "best_option_title": "Nombre de la mejor estrategia",
+  "why_is_best": "Explicación clara de por qué esta es la mejor salida legal y financiera.",
   "options": [
     {
-      "name": "Fondo Sinking Fund a 60 días en Cajita Remunerada",
-      "impact": "Ahorro de intereses y control total",
-      "monthly_cost": "Monto semanal o quincenal",
-      "horizon": "Semanas o meses",
-      "vehicle": "Cajitas de ahorro remuneradas (12% EA)",
-      "pros": "Pagas de contado, obtienes descuentos y no comprometes cuotas futuras",
-      "cons": "Requiere esperar 4 a 8 semanas antes de la compra",
+      "name": "Ruta A: Solicitud de Caducidad Legal (Habeas Data)",
+      "impact": "Eliminación del reporte a costo $0",
+      "monthly_cost": "Trámite gratuito",
+      "horizon": "15 a 30 días hábiles",
+      "vehicle": "Derecho de Petición Datacrédito / SIC",
+      "pros": "Trámite 100% legal, gratuito y retira el dato negativo definitivamente",
+      "cons": "Requiere haber cumplido los tiempos de ley (pago o 8 años de mora)",
       "is_best": true,
-      "deep_dive_description": "Abre una cajita o bolsillo específico para este artículo en Nu o Lulo Bank. Deposita el excedente quincenal y aprovecha los rendimientos diarios mientras llega la fecha de compra.",
-      "recommended_institutions": ["nubank", "lulobank", "mercadolibre"],
-      "expert_tip": "Aplica la regla de las 72 horas: si después de 3 días sigues queriéndolo tanto como el primer día, procede con el plan.",
+      "deep_dive_description": "Radica un reclamo formal ante Datacrédito alegando caducidad del dato negativo o cumplimiento del periodo máximo de permanencia. La entidad tiene 15 días hábiles para responder o retirar el reporte.",
+      "recommended_institutions": ["datacredito"],
+      "expert_tip": "Nunca pagues a personas que prometan borrar reportes de forma irregular; el proceso ante Datacrédito es un derecho de ley gratuito.",
       "steps": [
-        "Separar el dinero en una cajita exclusiva para el artículo",
-        "Esperar descuentos de temporada o días sin IVA",
-        "Pagar en 1 sola cuota para ganar puntos o cashback sin intereses"
+        "Consultar el reporte detallado en Midatacrédito",
+        "Verificar si la mora superó los 8 años o si ya pasaron los años post-pago",
+        "Radicar derecho de petición solicitando la eliminación del dato"
       ],
-      "chart_original": 4800000,
-      "chart_optimized": 4000000
+      "chart_original": 3000000,
+      "chart_optimized": 0
+    },
+    {
+      "name": "Ruta B: Crédito por Libranza en Cooperativa Financiera",
+      "impact": "Aprobación con reporte activo",
+      "monthly_cost": "Descuento por nómina",
+      "horizon": "12 a 36 meses",
+      "vehicle": "Fincomercio / Cooperativas de Ahorro",
+      "pros": "Te prestan legalmente porque el pago se debita de tu nómina",
+      "cons": "Aplica para empleados con contrato o pensionados",
+      "is_best": false,
+      "deep_dive_description": "Las cooperativas como Fincomercio evalúan tu estabilidad laboral y liquidez neta, no tu puntaje en centrales de riesgo. Es la forma más segura de financiamiento estando reportado.",
+      "recommended_institutions": ["fincomercio"],
+      "expert_tip": "Verifica que el descuento no supere el 50% de tu salario neto según la ley de libranza.",
+      "steps": [
+        "Presentar certificado laboral y desprendibles de nómina",
+        "Pactar cuota accesible acorde a tu flujo libre",
+        "Usar el desembolso para sanear la deuda pendiente"
+      ],
+      "chart_original": 3000000,
+      "chart_optimized": 2600000
+    },
+    {
+      "name": "Ruta C: Microcrédito de Rehabilitación y Score Positivo",
+      "impact": "Reconstrucción activa de puntaje",
+      "monthly_cost": "Pagos puntuales a 30 días",
+      "horizon": "3 a 6 meses",
+      "vehicle": "Fintech de Inclusión (Monet)",
+      "pros": "Genera reportes positivos mensuales que mejoran tu historial",
+      "cons": "Montos iniciales pequeños para probar cumplimiento",
+      "is_best": false,
+      "deep_dive_description": "Plataformas como Monet prestan a personas reportadas basándose en ingresos de cuenta bancaria. Al pagar puntualmente, generan reportes positivos que contrarrestan las moras pasadas.",
+      "recommended_institutions": ["monet"],
+      "expert_tip": "Paga siempre antes de la fecha límite para garantizar que el reporte positivo se transmita a la central.",
+      "steps": [
+        "Vincular cuenta bancaria en la app de Monet",
+        "Solicitar cupo de inclusión financiera",
+        "Pagar a tiempo para acumular reportes positivos"
+      ],
+      "chart_original": 3000000,
+      "chart_optimized": 2800000
     }
   ]
 }`
@@ -662,7 +710,7 @@ FORMATO JSON ESTRICTO:
         document.getElementById("callBadge").className = "text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 font-mono font-bold animate-pulse";
         
         if (turnCount === 0) {
-          const bienvenida = "Hola, soy FinAI. Cuéntame qué artículo o compra quieres hacer y buscaremos la forma más inteligente de pagarlo sin endeudarte.";
+          const bienvenida = "Hola, soy FinAI. Cuéntame tu situación financiera o tu meta y buscaremos las salidas más inteligentes y transparentes.";
           appendDialogue("ai", bienvenida);
           speakAI(bienvenida, () => {
             if (isCallActive) startListening();
@@ -680,8 +728,8 @@ FORMATO JSON ESTRICTO:
       appendDialogue("user", userText);
 
       conversationHistory.push({ role: "user", content: userText });
-      document.getElementById("callHeading").innerText = "FinAI analizando tu compra...";
-      document.getElementById("callSubheading").innerText = "Evaluando costo por uso, amortización y presupuesto...";
+      document.getElementById("callHeading").innerText = "FinAI diagnosticando...";
+      document.getElementById("callSubheading").innerText = "Analizando alternativas viables...";
 
       const aiResponse = await callGroqAPI();
 
@@ -771,90 +819,110 @@ FORMATO JSON ESTRICTO:
         }
       }
 
-      // Fallback inteligente para compras generales
+      // Fallback para reportados
       const lastUserMsg = conversationHistory[conversationHistory.length - 1].content.toLowerCase();
-      const hasNumbers = /\d+/.test(lastUserMsg);
+      const isReportedCase = lastUserMsg.includes("reportado") || lastUserMsg.includes("datacrédito") || lastUserMsg.includes("datacredito");
 
-      if (!hasNumbers) {
+      if (isReportedCase) {
         return {
-          voice_reply: "Comprar un artículo nuevo se siente genial, pero no queremos que te apriete el mes. Para ayudarte a armar la mejor compra, cuéntame: ¿cuánto vale aproximadamente y cuánto te queda libre al mes?",
-          is_ready_for_solutions: false,
+          voice_reply: "Estar reportado no es el fin del mundo y tiene solución legal y financiera. Te estructuré las 3 salidas reales: solicitud de caducidad legal, crédito por libranza o fintechs de inclusión como Monet.",
+          is_ready_for_solutions: true,
           detected_variables: {
-            goal: "Artículo / Compra General",
-            approx_cost: "Por definir",
-            monthly_income_or_savings: "Pendiente"
-          }
+            goal: "Rehabilitación de Reporte",
+            approx_cost: "$3.000.000",
+            monthly_income_or_savings: "En recuperación"
+          },
+          best_option_title: "Ruta A: Solicitud de Caducidad Legal (Habeas Data)",
+          why_is_best: "Es la mejor alternativa porque es un derecho de ley 100% gratuito. Si ya pagaste o si la mora superó los 8 años, el reporte debe eliminarse formalmente sin pagarle un solo peso a tramitadores.",
+          options: [
+            {
+              name: "Ruta A: Solicitud de Caducidad Legal (Habeas Data)",
+              impact: "Retiro del reporte a costo $0",
+              monthly_cost: "Trámite gratuito",
+              horizon: "15 a 30 días hábiles",
+              vehicle: "Portal Oficial Datacrédito / SIC",
+              pros: "Trámite 100% legal, gratuito y retira el dato negativo definitivamente",
+              cons: "Aplica si la mora cumplió 8 años o el tiempo de permanencia tras pago",
+              is_best: true,
+              deep_dive_description: "Radica una petición ante Datacrédito alegando caducidad legal del dato negativo o cumplimiento del término post-pago. Las centrales están obligadas a actualizar tu historial sin costo.",
+              recommended_institutions: ["datacredito"],
+              expert_tip: "No le pagues a intermediarios que prometen 'borrar reportes mágicamente'. El trámite ante Datacrédito es un derecho legal gratuito.",
+              steps: [
+                "Revisar tu historial detallado en Midatacrédito",
+                "Verificar fecha exacta de inicio de mora o de pago",
+                "Radicar derecho de petición solicitando la caducidad del dato"
+              ],
+              chart_original: 3000000,
+              chart_optimized: 0
+            },
+            {
+              name: "Ruta B: Crédito por Libranza en Cooperativa",
+              impact: "Aprobación con reporte vigente",
+              monthly_cost: "Descuento por nómina",
+              horizon: "12 a 36 meses",
+              vehicle: "Fincomercio / Cooperativas Aliadas",
+              pros: "Te prestan legalmente porque el pago se descuenta directo de tu nómina",
+              cons: "Aplica para empleados con contrato formal o pensionados",
+              is_best: false,
+              deep_dive_description: "Cooperativas como Fincomercio evalúan tu estabilidad laboral y capacidad de pago mensual, no tu score en centrales. Permite acceder a liquidez para sanear obligaciones.",
+              recommended_institutions: ["fincomercio"],
+              expert_tip: "Asegúrate de que la cuota descontada no supere tu capacidad real de sustento mensual.",
+              steps: [
+                "Presentar certificado laboral y desprendibles de nómina",
+                "Pactar cuota accesible acorde a tu flujo libre",
+                "Destinar el recurso a cancelar las deudas en mora"
+              ],
+              chart_original: 3000000,
+              chart_optimized: 2600000
+            },
+            {
+              name: "Ruta C: Microcrédito de Rehabilitación (Monet)",
+              impact: "Reportes positivos a tu historial",
+              monthly_cost: "Pago puntual a 30 días",
+              horizon: "3 a 6 meses",
+              vehicle: "Fintech de Inclusión (Monet)",
+              pros: "Presta a reportados y genera reportes positivos para reconstruir tu puntaje",
+              cons: "Montos iniciales pequeños mientras demuestras cumplimiento",
+              is_best: false,
+              deep_dive_description: "Monet evalúa los movimientos de tu cuenta bancaria y no tu historial crediticio. Al pagar a tiempo, envía reportes positivos a las centrales para rehabilitar tu perfil.",
+              recommended_institutions: ["monet"],
+              expert_tip: "Paga siempre 2 días antes de la fecha límite para asegurar la transmisión de la calificación positiva.",
+              steps: [
+                "Descargar y vincular tu cuenta en Monet",
+                "Solicitar cupo de inclusión financiera",
+                "Pagar cumplidamente para acumular historial positivo"
+              ],
+              chart_original: 3000000,
+              chart_optimized: 2800000
+            }
+          ]
         };
       }
 
       return {
-        voice_reply: "Para comprar este artículo sin asfixiarte, la mejor opción es un fondo de amortización a 60 días en una cajita remunerada. Pagas de contado, evitas intereses de tarjeta y hasta ganas descuentos.",
+        voice_reply: "Para comprar este artículo sin asfixiarte, la mejor opción es un fondo de amortización en una cajita remunerada. Pagas de contado y evitas intereses.",
         is_ready_for_solutions: true,
         detected_variables: {
-          goal: "Artículo Personal / Meta",
+          goal: "Meta / Artículo",
           approx_cost: "$4.000.000",
-          monthly_income_or_savings: "$2.800.000 / mes"
+          monthly_income_or_savings: "$2.800.000"
         },
-        best_option_title: "Fondo Sinking Fund en Cajita Remunerada (60 días)",
-        why_is_best: "Es la mejor opción porque te ahorra más de $650.000 en intereses que te cobraría una tarjeta a cuotas. Al apartar el dinero en una cajita remunerada al 12% EA, el dinero trabaja para ti mientras esperas la mejor oferta.",
+        best_option_title: "Fondo Sinking Fund en Cajita Remunerada",
+        why_is_best: "Evita intereses de tarjeta y hace rentar tu dinero a la vista mientras llega la compra.",
         options: [
           {
-            name: "Ruta A: Fondo Sinking Fund en Cajita Remunerada",
+            name: "Ruta A: Fondo Sinking Fund en Cajita Nu/Lulo",
             impact: "Ahorro de $650.000 en intereses",
             monthly_cost: "$500.000 quincenales",
-            horizon: "2 meses (60 días)",
-            vehicle: "Cajita remunerada a la vista (12% EA)",
-            pros: "Pagas de contado, ganas cashback y evitas ataduras crediticias",
-            cons: "Esperar 8 semanas antes de estrenar",
+            horizon: "60 días",
+            vehicle: "Cajitas de ahorro remuneradas (12% EA)",
+            pros: "Pagas de contado y cero deudas",
+            cons: "Esperar un par de meses",
             is_best: true,
-            deep_dive_description: "Crea una Cajita en Nu o Lulo Bank exclusiva para este artículo. Haz dos abonos quincenales automáticos; tu dinero renta a la vista y compras en 1 sola cuota obteniendo cashback.",
-            recommended_institutions: ["nubank", "lulobank", "amazon"],
-            expert_tip: "Usa la regla de las 72 horas para asegurar que el artículo realmente agrega valor a tu día a día.",
-            steps: [
-              "Crear un bolsillo dedicado con meta de ahorro",
-              "Aportar el excedente quincenal sin tocar gastos fijos",
-              "Comprar en 1 sola cuota aprovechando promociones"
-            ],
-            chart_original: 4650000,
-            chart_optimized: 4000000
-          },
-          {
-            name: "Ruta B: Compra de Segunda Mano Certificada / Reacondicionada",
-            impact: "Ahorro directo de ~30% ($1.2M)",
-            monthly_cost: "Pago único menor",
-            horizon: "Inmediato",
-            vehicle: "Mercado Libre / Amazon Renewed",
-            pros: "Mismo rendimiento por una fracción del costo",
-            cons: "No es un producto sellado de fábrica",
-            is_best: false,
-            deep_dive_description: "Busca el mismo modelo con garantía certificada en Mercado Libre o Amazon. Mantienes la misma utilidad ahorrando hasta un 35% del valor nuevo.",
-            recommended_institutions: ["mercadolibre", "amazon"],
-            expert_tip: "Verifica que el vendedor cuente con reputación verde y garantía mínima de 6 meses.",
-            steps: [
-              "Comparar precio nuevo vs reacondicionado certificado",
-              "Verificar política de devolución de 30 días",
-              "Comprar de contado con el ahorro ya existente"
-            ],
-            chart_original: 4650000,
-            chart_optimized: 2800000
-          },
-          {
-            name: "Ruta C: Compra a 1 Cuota con Tarjeta de Crédito",
-            impact: "30 días de financiación a 0% interés",
-            monthly_cost: "Pago total al siguiente mes",
-            horizon: "30 días",
-            vehicle: "Tarjeta de Crédito (1 Cuota)",
-            pros: "Acumulas puntos y compras de inmediato sin pagar intereses",
-            cons: "Debes tener la totalidad del dinero al corte de la tarjeta",
-            is_best: false,
-            deep_dive_description: "Difiere la compra a 1 sola cuota después de tu fecha de corte. Tienes hasta 45 días de liquidez gratis sin pagar un solo peso de interés.",
-            recommended_institutions: ["nubank", "bancolombia"],
-            expert_tip: "Paga siempre el monto total facturado antes de la fecha límite para evitar intereses corrientes.",
-            steps: [
-              "Comprar 1 día después de la fecha de corte",
-              "Apartar el dinero en una cajita remunerada durante los 30 días",
-              "Pagar el 100% de la cuota en la fecha de pago"
-            ],
+            deep_dive_description: "Aparta el excedente quincenal en una cajita remunerada de Nu o Lulo Bank ganando intereses diarios.",
+            recommended_institutions: ["nubank", "lulobank"],
+            expert_tip: "Usa la regla de las 72 horas antes de desembolsar.",
+            steps: ["Crear bolsillo", "Aportar quincenal", "Comprar de contado"],
             chart_original: 4650000,
             chart_optimized: 4000000
           }
@@ -895,8 +963,8 @@ FORMATO JSON ESTRICTO:
 
       document.getElementById("screen2StatSavings").innerText = currentOpt.impact;
       document.getElementById("screen2StatMonthly").innerText = currentOpt.monthly_cost || "N/A";
-      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "60 días";
-      document.getElementById("screen2StatVehicle").innerText = currentOpt.vehicle || "Táctica Inteligente";
+      document.getElementById("screen2StatHorizon").innerText = currentOpt.horizon || "Trámite legal";
+      document.getElementById("screen2StatVehicle").innerText = currentOpt.vehicle || "Canal Recomendado";
 
       document.getElementById("nextBtnLabel").innerText = `Confirmar Ruta ${String.fromCharCode(65 + selectedOptionIndex)} y Ver Plan`;
 
@@ -915,7 +983,7 @@ FORMATO JSON ESTRICTO:
           <div>
             <div class="flex items-center justify-between mb-2">
               <span class="text-[10px] font-mono font-bold text-slate-400 uppercase">Ruta ${String.fromCharCode(65 + idx)}</span>
-              ${opt.is_best ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">★ LA MEJOR</span>' : ''}
+              ${opt.is_best ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">★ RECOMENDADA</span>' : ''}
               <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                 ${opt.impact}
               </span>
@@ -924,7 +992,7 @@ FORMATO JSON ESTRICTO:
             <h4 class="text-sm font-bold text-slate-900 mb-1.5">${opt.name}</h4>
             
             <div class="text-[11px] font-mono text-cyan-700 font-semibold mb-2 bg-cyan-50 p-1.5 rounded-lg border border-cyan-100">
-              📌 ${opt.vehicle || 'Vehículo financiero'}
+              📌 ${opt.vehicle || 'Vehículo / Trámite'}
             </div>
 
             <div class="space-y-1 text-xs mb-3">
@@ -965,14 +1033,14 @@ FORMATO JSON ESTRICTO:
       const banksGrid = document.getElementById("recommendedBanksGrid");
       banksGrid.innerHTML = "";
 
-      const institutionKeys = opt.recommended_institutions || ["nubank", "lulobank", "mercadolibre"];
+      const institutionKeys = opt.recommended_institutions || ["datacredito", "monet", "fincomercio"];
 
       institutionKeys.forEach(key => {
         const bank = BANK_CATALOG[key] || {
           name: key.toUpperCase(),
           logo: "🏛️",
           badgeColor: "bg-slate-100 text-slate-700 border-slate-200",
-          rate: "Canal Sugerido",
+          rate: "Canal Oficial",
           perk: "Opción recomendada por FinAI",
           url: "#"
         };
@@ -995,7 +1063,7 @@ FORMATO JSON ESTRICTO:
             </p>
           </div>
           <a href="${bank.url}" target="_blank" rel="noopener noreferrer" class="w-full py-1.5 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 hover:border-emerald-200 text-[11px] font-semibold flex items-center justify-center gap-1 transition">
-            <span>Ver canal</span>
+            <span>Abrir canal</span>
             <i data-lucide="external-link" class="w-3 h-3"></i>
           </a>
         `;
@@ -1007,7 +1075,7 @@ FORMATO JSON ESTRICTO:
       selectedOptionIndex = index;
       const opt = activeData.options[selectedOptionIndex];
       renderScreen2();
-      speakAI(`Has seleccionado ${opt.name}. Actualizamos las recomendaciones de compra para esta opción.`);
+      speakAI(`Has seleccionado ${opt.name}. Actualizamos los canales y pasos para esta opción.`);
     }
 
     // VOZ EN PANTALLA 2
@@ -1051,17 +1119,17 @@ FORMATO JSON ESTRICTO:
       if (!text) return;
 
       input.value = "";
-      speakAI("Ajustando la estrategia de compra con tu nuevo planteamiento...");
+      speakAI("Ajustando la estrategia con tu nuevo planteamiento...");
 
       const lower = text.toLowerCase();
       if (activeData && activeData.options) {
-        if (lower.includes("opción b") || lower.includes("ruta b") || lower.includes("usado") || lower.includes("reacondicionado")) {
+        if (lower.includes("opción b") || lower.includes("ruta b") || lower.includes("libranza") || lower.includes("cooperativa")) {
           selectOptionByIndex(1);
           return;
-        } else if (lower.includes("opción c") || lower.includes("ruta c") || lower.includes("1 cuota")) {
+        } else if (lower.includes("opción c") || lower.includes("ruta c") || lower.includes("monet") || lower.includes("microcrédito")) {
           selectOptionByIndex(2);
           return;
-        } else if (lower.includes("opción a") || lower.includes("ruta a") || lower.includes("cajita") || lower.includes("fondo")) {
+        } else if (lower.includes("opción a") || lower.includes("ruta a") || lower.includes("caducidad") || lower.includes("legal") || lower.includes("habeas")) {
           selectOptionByIndex(0);
           return;
         }
@@ -1069,7 +1137,7 @@ FORMATO JSON ESTRICTO:
 
       conversationHistory.push({
         role: "user",
-        content: `El usuario comenta esto para ajustar la compra: "${text}". Reestructura las opciones prácticas sin deudas innecesarias.`
+        content: `El usuario comenta esto para ajustar el saneamiento o crédito: "${text}". Reestructura las opciones y actualiza los canales.`
       });
 
       const updated = await callGroqAPI();
@@ -1118,9 +1186,9 @@ FORMATO JSON ESTRICTO:
       finalChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Compra Impulsiva a Cuotas', `Con tu Plan FinAI`],
+          labels: ['Situación Actual / Bloqueo', `Con tu Plan FinAI`],
           datasets: [{
-            data: [opt.chart_original || 4650000, opt.chart_optimized || 4000000],
+            data: [opt.chart_original || 3000000, opt.chart_optimized || 0],
             backgroundColor: ['rgba(225, 29, 72, 0.15)', 'rgba(5, 150, 105, 0.2)'],
             borderColor: ['#E11D48', '#059669'],
             borderWidth: 1.5,
@@ -1138,7 +1206,7 @@ FORMATO JSON ESTRICTO:
         }
       });
 
-      speakAI(`Excelente decisión. Consolidamos tu plan de compra inteligente con ${opt.name}. Aquí tienes tu hoja de ruta paso a paso.`);
+      speakAI(`Excelente decisión. Consolidamos tu plan de rehabilitación con ${opt.name}. Aquí tienes tu hoja de ruta paso a paso.`);
     }
 
     // ==========================================
@@ -1176,10 +1244,10 @@ FORMATO JSON ESTRICTO:
       document.getElementById("turnCounter").innerText = "0 turnos";
       document.getElementById("tagGoal").innerText = "Por definir";
       document.getElementById("tagCost").innerText = "Pendiente";
-      document.getElementById("tagIncome").innerText = "Pendiente";
+      document.getElementById("tagIncome").innerText = "Evaluando";
       document.getElementById("liveDialogueContainer").innerHTML = `
         <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 italic text-center">
-          Tu conversación y las preguntas de diagnóstico irán apareciendo aquí...
+          Tu conversación y el diagnóstico de FinAI irán apareciendo aquí...
         </div>
       `;
       document.getElementById("finishChatBtn").disabled = true;
